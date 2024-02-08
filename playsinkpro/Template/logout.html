@@ -1,0 +1,10 @@
+{% load static %}
+{% include "header.html" %}
+{% block 'main' %}
+<link rel="stylesheet" href="{% static "logout.css" %}">
+<link rel="stylesheet" href="{% static "index.css" %}">
+<div class="container">
+    <p>You have been successfully logged out.</p>
+</div>
+{% endblock 'main' %}
+{% include "footer.html" %}
