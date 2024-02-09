@@ -10,6 +10,10 @@ def login (request):
     return render(request, 'login.html',)
 def logout (request):
     return render(request, 'logout.html',)
+def playlist (request):
+    return render(request, 'playlist.html',)
+def search (request):
+    return render(request, 'search.html',)
 def register(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
