@@ -3,7 +3,7 @@ from playsinkapp import views
 
 urlpatterns = [
     path('home',views.home),
-    path('login',views.login),
+    path('login',views.user_login),
     path('logout',views.logout),
     path('register',views.register),
     path('playlist',views.playlist),
