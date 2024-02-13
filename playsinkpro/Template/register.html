@@ -7,30 +7,32 @@
 <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
 <link rel="stylesheet" href="{% static "register.css" %}">
 {% endblock %}
-<div class="container">
-    <h3 style="text-align: center;">User Registration</h3>
-    <form method="POST" action="" style="align-items: center; max-width: 400px; margin: 0 auto;">
-        {% csrf_token %}
-        {% if errormsg %}
-            <div class="alert alert-danger">{{ errormsg }}</div>
+<body style="background-color: black;">
+    <div class="container"style="border-color: black;">
+        <h3 style="text-align: center;color:white;" >User Registration</h3>
+        <form method="POST" action="" style="align-items: center; max-width: 400px; margin: 0 auto;">
+            {% csrf_token %}
+            {% if errormsg %}
+                <div class="alert alert-danger">{{ errormsg }}</div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="input1" class="form-label"style="color:white">User Name</label>
+                <input type="text" class="form-control" id="input1" name="uname" placeholder="Enter your E-Mail">
+            </div>
+            <div class="mb-3">
+                <label for="input2" class="form-label"style="color:white">Password</label>
+                <input type="password" class="form-control" id="input2" name="upass" placeholder="Enter Password">
+            </div>
+            <div class="mb-3">
+                <label for="input3" class="form-label"style="color:white">Confirm Password</label>
+                <input type="password" class="form-control" id="input3" name="ucpass" placeholder="Confirm Password">
+            </div>
+            <button type="submit" class="btn btn-success">Register</button>
+        </form>
+        {% if success %}
+            <div class="alert alert-success">{{ success }}</div>
         {% endif %}
-        <div class="mb-3">
-            <label for="input1" class="form-label">User Name</label>
-            <input type="text" class="form-control" id="input1" name="uname" placeholder="Enter your E-Mail">
-        </div>
-        <div class="mb-3">
-            <label for="input2" class="form-label">Password</label>
-            <input type="password" class="form-control" id="input2" name="upass" placeholder="Enter Password">
-        </div>
-        <div class="mb-3">
-            <label for="input3" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="input3" name="ucpass" placeholder="Confirm Password">
-        </div>
-        <button type="submit" class="btn btn-success">Register</button>
-    </form>
-    {% if success %}
-        <div class="alert alert-success">{{ success }}</div>
-    {% endif %}
-</div>
+    </div>
+</body>
 {% endblock main %}
 {% include "footer.html" %}

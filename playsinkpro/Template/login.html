@@ -5,21 +5,21 @@
 <link rel="stylesheet" href="{% static "style.css" %}">
 <link rel="stylesheet" href="{% static "index.css" %}">
 {% endblock %}
-<body>
+<body style="background-color: #000;">
     <!-- <div class="signup_header">
         <img src="{% static "logo.png" %}" alt="Logo">
     </div> -->
-    <div class="signup_body">
-        <form class="login_form" method="POST" action = "/login"style="margin-top:-1px">
+    <div class="signup_body"style="background-color:black">
+        <form class="login_form" method="POST" action = "/login"style="margin-top:-1px; background-color:black">
             {% csrf_token %}
-            <label for="login-username" class="label">
+            <label for="login-username" class="label"style="color:white">
                 Email address or username
             </label>
             <input type="text" class="form_input" pattern="[A-Za-z0-9.@_-e]+" name="uname" placeholder="Email address or username" required>
-            <label for="login-password" class="label">
+            <label for="login-password" class="label" style="color:white">
                 Password
             </label>
-            <input type="password" class="form_input" name="upass" placeholder="Password" required>
+            <input type="password" class="form_input" name="upass" placeholder="Password" required >
             {% if errormsg %}
             <div class="alert alert-danger">{{ errormsg }}</div>
             {% endif %}
@@ -28,7 +28,7 @@
             {% endif %} -->
             <button class="btn btn_log_in" type="submit">Log in</button>
             <div class="divider"></div>
-            <p class="label center-align">Don't have an account?</p>
+            <p class="label center-align" style="color:white">Don't have an account?</p>
             <a class="btn btn_sign_up" href="/register">Sign Up for Spotify</a>
         </form>
     </div>

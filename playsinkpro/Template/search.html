@@ -14,7 +14,8 @@ active
 {% endblock %} -->
 
 {% block main %}
-<h1>This Is Search</h1>
+<body style="background-color: black;">
+    <h1 style="color: white">This Is Search</h1>
     <div class="homecontainer">
         {% for playlist in CONTAINER %}
         <div class="category">
@@ -36,5 +37,6 @@ active
         {% endfor %}
 
     </div>
+</body>
 {% endblock %}
 {% include "footer.html" %}
