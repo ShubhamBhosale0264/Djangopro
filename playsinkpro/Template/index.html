@@ -1,15 +1,15 @@
 {% load static %}
 {% include "header.html" %}
+{% block css %}
+<link rel="stylesheet" href="{% static "index.css" %}">
+<link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
+{% endblock %}
 {% block 'main' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block css %}
-    <link rel="stylesheet" href="{% static "index.css" %}">
-    <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
-    {% endblock %}
     <title>home</title>
 </head>
 <body style="background-color: black;">
@@ -19,7 +19,7 @@
 
         <div class="playlist">
           <div class="container mt-5">
-            <h1 class="text-center">Playlist</h1>
+            <h1 class="text-left"style="color: aliceblue;">Playlist</h1>
             <div class="row">
               <div class="col-md-4">
                 <div class="card h-100">
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="container mt-5">
-            <h1 class="text-center">Focus</h1>
+            <h1 class="text-left"style="color: aliceblue;">Focus</h1>
             <div class="row">
               <div class="col-md-4">
                 <div class="card h-100">
@@ -101,7 +101,7 @@
             </div>
           </div>
           <div class="container mt-5">
-            <h1 class="text-center">Mood</h1>
+            <h1 class="text-left"style="color: aliceblue;">Mood</h1>
             <div class="row">
               <div class="col-md-4">
                 <div class="card h-100">

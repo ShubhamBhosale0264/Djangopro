@@ -6,11 +6,11 @@
 <link rel="stylesheet" href="{% static "index.css" %}">
 {% endblock %}
 <body>
-    <div class="signup_header">
+    <!-- <div class="signup_header">
         <img src="{% static "logo.png" %}" alt="Logo">
-    </div>
+    </div> -->
     <div class="signup_body">
-        <form class="login_form" method="POST" action = "/login">
+        <form class="login_form" method="POST" action = "/login"style="margin-top:-1px">
             {% csrf_token %}
             <label for="login-username" class="label">
                 Email address or username
