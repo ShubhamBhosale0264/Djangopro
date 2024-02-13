@@ -29,8 +29,9 @@ def user_login(request):
     else:
         return render(request, 'login.html')
 
-def logout(request):
-    return render(request, 'logout.html')
+def user_logout(request):
+    logout(request)
+    return redirect('/home')
 
 def playlist(request):
     return render(request, 'playlist.html')

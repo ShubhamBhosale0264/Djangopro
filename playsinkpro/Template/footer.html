@@ -1,10 +1,33 @@
+_________________________________________________________________________________________________________________________________________________________________
+{% if not user.is_authenticated %}
 <div class="preview">
   <div class="text">
-    <h6>Preview of Spotify</h6>
+    <h6>Preview of PlaysinkPro</h6>
     <p>Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.</p>
   </div>
   <div class="button">
     <a href="/register" class="btn btn-primary">Sign up free</a>
+  </div>
+</div>
+{% endif %}
+<br>
+<div class="row">
+  <div class="col-md-4 text-left">
+    <i class="bi bi-geo-alt"></i>
+    <span style="color: white;"><b>Address</b> Plot No.C-68, एवेन्यू 3, G Block BKC, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051</span>
+  </div>
+
+  <div class="col-md-4 text-center">
+    <a href="https://www.facebook.com" style="text-decoration: none;color: white"><i class="bi bi-facebook"></i> <span>Facebook</span></a><br>
+    <a href="https://www.twitter.com" style="text-decoration: none;color: white"><i class="bi bi-twitter"></i> <span>Twitter</span></a><br>
+    <a href="https://www.instagram.com" style="text-decoration: none;color: white"><i class="bi bi-instagram"></i> <span>Instagram</span></a><br>
+    <a href="https://www.linkedin.com" style="text-decoration: none;color: white"><i class="bi bi-linkedin"></i> <span>LinkedIn</span></a>
+  </div>
+
+  <div class="col-md-4 text-right">
+    <i class="bi bi-telephone"></i>
+    <span style="color: white;"><b>Contact</b> +91 88504 52049</span><br>
+    <span style="color: white;"><b>Gmail</b> playsingpro@gmail.com</span>
   </div>
 </div>
 

@@ -6,7 +6,8 @@
     <div class="sidebar">
       <div class="logo">
           <a href="/home">
-            <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Logo" />
+            <img src="/static/logo.png" alt="Logo" />
+            <h4 style="text-align: center;color: white;text-decoration: none;">Playsink</h4>
           </a>
         </div>
         <div class="navigation">
@@ -69,14 +70,19 @@
           <a href="/about">About</a>
         </li>
         <li class="divider">|</li>
+        {% if user.is_authenticated %}
         <li>
           <a href="/logout">Logout</a>
         </li>
+        {% else %}
           <li>
             <a href="/login">Log In</a>
           </li>
+        {% endif %}
         </ul>
+        _________________________________________________________________________________________________________________________________________________________________
       </div>
+      
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
