@@ -12,8 +12,9 @@
     left: 0;
     top: 0;
     bottom: 0;
+    border: 2px white;
     width: 196px;
-    background-color: #000000;
+    background-color: red;
     padding: 24px;
   }
   .sidebar .logo img {
