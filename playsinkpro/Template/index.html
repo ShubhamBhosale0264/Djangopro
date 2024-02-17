@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static "index.css" %}">
 <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
 {% endblock %}
-{% block 'main' %}
+{% block main %} {# removed single quotes around 'main' #}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,131 +22,30 @@
           <div class="container mt-5">
             <h1 class="text-left"style="color: aliceblue;margin-top: -75px;">Playlist's</h1>
             <div class="row">
+              {% for song in songs %}
               <div class="col-md-4">
-                <div class="card h-100">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
-                  <div class="play">
-                    <span class="fa fa-play"></span>
+                  <div class="card h-100">
+                      <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
+                      <div class="play">
+                          <span class="fa fa-play"></span>
+                      </div>
+                      <div class="card-body">
+                          <h5 class="card-title">{{ song.song_title }}</h5>
+                          <p class="card-text">{{ song.artist_name }}</p>
+                          <!-- <p class="card-text">{{ song.album_name }}</p> -->
+                      </div>
                   </div>
-                  <div class="card-body">
-                    <h5 class="card-title">Today's Top Hits</h5>
-                    <p class="card-text">Rema & Selena Gomez are on top of the...</p>
-                  </div>
-                </div>
               </div>
-              <div class="col-md-4">
-                <div class="card h-100">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
-                  <div class="play">
-                    <span class="fa fa-play"></span>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">RapCaviar</h5>
-                    <p class="card-text">New Music from Lil Baby, Juice WRLD an...</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card h-100">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
-                  <div class="play">
-                    <span class="fa fa-play"></span>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">All out 2010s</h5>
-                    <p class="card-text">The biggest songs of the 2010s. Cover:...</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="container mt-5">
-            <h1 class="text-left"style="color: aliceblue;">Focus</h1>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card h-100">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
-                  <div class="play">
-                    <span class="fa fa-play"></span>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">Peaceful Piano</h5>
-                    <p class="card-text">Relax and indulge with beautiful piano pieces</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card h-100">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
-                  <div class="play">
-                    <span class="fa fa-play"></span>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">Deep Focus</h5>
-                    <p class="card-text">Keep calm and focus with ambient and pos...</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card h-100">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
-                  <div class="play">
-                    <span class="fa fa-play"></span>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">Instrumental Study</h5>
-                    <p class="card-text">Focus with soft study music in the...</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="container mt-5">
-            <h1 class="text-left"style="color: aliceblue;">Mood</h1>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card h-100">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
-                  <div class="play">
-                    <span class="fa fa-play"></span>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">Mood Booster</h5>
-                    <p class="card-text">Get happy with today's dose of feel-good...</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card h-100">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
-                  <div class="play">
-                    <span class="fa fa-play"></span>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">Feelin' Good</h5>
-                    <p class="card-text">Feel good with this positively timeless...</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card h-100">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
-                  <div class="play">
-                    <span class="fa fa-play"></span>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">Dark & Stormy</h5>
-                    <p class="card-text">Beautifully dark, dramatic tracks..</p>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
             </div>
           </div>
         </div>
-        
+      </div>
+    </div>
+  </div>
 
 <script src="https://kit.fontawesome.com/23cecef777.js" crossorigin="anonymous"></script>
 </body>
 </html>
-{% endblock 'main' %}
+{% endblock main %} 
 {% include "footer.html" %}

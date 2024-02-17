@@ -1,14 +1,16 @@
 from django.shortcuts import get_object_or_404, redirect, render,HttpResponse
 from django.views import View
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.db import IntegrityError
 from django.db.models import Q
 
+from .models import Song
+
 
 def home(request):
-    return render(request, 'index.html')
+    songs = Song.objects.all() 
+    return render(request, 'index.html', {'songs': songs})
 def about(request):
     return render(request, 'about.html')
 
@@ -63,3 +65,8 @@ def register(request):
                 return render(request, 'register.html', {'errormsg': errormsg})
     else:
         return render(request, 'register.html')
+def songfilter(request, genre):
+    q = Q(song_genre__name=genre)
+    songs = Song.objects.filter(q)
+    context = {'songs': songs}
+    return render(request, 'index.html', context)

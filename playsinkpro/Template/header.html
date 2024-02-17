@@ -6,55 +6,20 @@
     <div class="sidebar">
       <div class="logo">
           <a href="/home">
-            <img src="/static/logo.png" alt="Logo" style="height: 50px; width: 50px;margin-left: 50px;"/>
-            <h4 style="text-align: center;color: white;text-decoration: none; margin-bottom: 30px;">Playsink</h4>
+              <img src="/static/logo.png" alt="Logo" style="height: 50px; width: 50px;margin-left: 50px;"/>
+              <h2 style="text-align: center;color: white;text-decoration: none; margin-bottom: 30px;">Playsink</h2>
           </a>
-        </div>
-        <div class="filter-section mt-3">
-          <h2 class="text-left" style="color: aliceblue; text-align: center;margin-bottom: 30px;">Filters</h2>
-          <form id="filterForm">
-            <div class="form-group" style="text-align: center;">
-              <label for="genre" style="color: white;border: 2px white;"> <h5>Filter by Genre:</h5></label>
-              <select class="form-control" id="genre" style="background-color: #000000;border: #000;">
-                <option style="color: white;" value="all">NaN</option>
-                <option style="color: white;" value="all">Romantic</option>
-                <option style="color: white;" value="all">Motivatinoal</option>
-                <option style="color: white;" value="all">Sad</option>
-                <option style="color: white;" value="all">Energetic</option>
-                <option style="color: white;" value="all">Pop</option>
-              </select>
-            </div>
-            <div class="form-group" style="text-align: center;">
-              <label for="singer"style="color: white;"><h5>Filter By Singer:</h5></label>
-              <select class="form-control" id="genre" style="background-color: black;border: #000;">
-                <option style="color: white;" value="all">NaN</option>
-                <option style="color: white;" value="all">Shreya Ghoshal</option>
-                <option style="color: white;" value="all">Ajay-Atul</option>
-                <option style="color: white;" value="all">Arjit Singh</option>
-                <option style="color: white;" value="all">Lata Mangeshkar</option>
-                <option style="color: white;" value="all">Kumar sanu</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primary" style="margin: 10px;margin-bottom: 30px;">Apply Filters</button>
-            <div class="mb-3" style="align-self: center;">
-              <h2 class="text-left" style="color: aliceblue; text-align: center;">Sort</h2>
-              <button type="submit" class="btn "style="margin-bottom: 5px; color:white;"><h5>Oldest First</h5></button>
-              <button type="submit" class="btn "style="color:white"><h5>Newest first</h5></button>
-            </div>
-            <div class="policies">
-              <ul>
-                <li>
-                  <a href="#">Cookies</a>
-                  <a href="#">Privacy</a>
-                </li>
-              </ul>
-            </div>
-          </form>
-        </div>  
-        
       </div>
-      
-    </div>
+      <div class="filter-section mt-3">
+          <h5 class="text-left" style="color: aliceblue; text-align: center;margin-bottom: 30px;">Legal & Privacy</h5>
+          <ul class="list-unstyled">
+            <li><a href="/cookies" style="color: white; text-decoration: none;text-align: center;">Cookies Policy</a></li><br>
+            <li><a href="/legal" style="color: white; text-decoration: none;text-align: center;">Legal Notices</a></li><br>
+            <li><a href="/privacy" style="color: white; text-decoration: none;text-align: center;">Privacy Policy</a></li>
+        </ul>
+      </div>
+  </div>
+  
   </div>
 {% endblock %}
 <div class="main-container">
