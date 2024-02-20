@@ -73,7 +73,7 @@
   .sidebar .policies ul li a:hover,
   .sidebar .policies ul li a:active,
   .sidebar .policies ul li a:focus {
-    text-decoration: underline;
+    text-decoration: none;
   }
   
   .main-container {
