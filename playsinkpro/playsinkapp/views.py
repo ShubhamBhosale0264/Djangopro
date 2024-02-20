@@ -65,8 +65,17 @@ def register(request):
                 return render(request, 'register.html', {'errormsg': errormsg})
     else:
         return render(request, 'register.html')
-def songfilter(request, genre):
-    q = Q(song_genre__name=genre)
-    songs = Song.objects.filter(q)
-    context = {'songs': songs}
-    return render(request, 'index.html', context)
+# def songfilter(request, genre):
+#     q = Q(song_genre__name=genre)
+#     songs = Song.objects.filter(q)
+#     context = {'songs': songs}
+#     return render(request, 'index.html', context)
+def sort (request,sv):
+    if sv =='0':
+        col  = 'price'
+    else :
+        col = '-price'
+    p = Song.objects.order_by('length')
+    context = {}
+    context['song'] = p
+    return render(request,"index.html",context)

@@ -1,51 +1,45 @@
 {% load static %}
-{% include "header.html" %}
-{% block css %}
-<link rel="stylesheet" href="{% static "index.css" %}">
-<link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
-{% endblock %}
-{% block main %} {# removed single quotes around 'main' #}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static "index.css" %}">
+    <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
 </head>
-
-<body style="background-color: black;margin-top: 0px;">
-  <div class="container" >
-    <div class="row justify-content-md-center">
-      <div class="col-md-12 shadow mt-1">
-
-        <div class="playlist" style="margin-top: 0%;">
-          <div class="container mt-5">
-            <h1 class="text-left"style="color: aliceblue;margin-top: -75px;">Playlist's</h1>
-            <div class="row">
-              {% for song in songs %}
-              <div class="col-md-4">
-                  <div class="card h-100">
-                      <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" class="card-img-top" alt="...">
-                      <div class="play">
-                          <span class="fa fa-play"></span>
-                      </div>
-                      <div class="card-body">
-                          <h5 class="card-title">{{ song.song_title }}</h5>
-                          <p class="card-text">{{ song.artist_name }}</p>
-                          <!-- <p class="card-text">{{ song.album_name }}</p> -->
-                      </div>
-                  </div>
-              </div>
-              {% endfor %}
+<body style="background-color:#0c0d0f">
+    {% include "header.html" %}
+    
+    <div class="container-fluid" style="background-image: url('{% static "playsinkpro.jpg" %}'); margin-top: -60px;">
+        <div class="row justify-content-center">
+            <div class="col-md-10 shadow mt-1">
+                <div class="playlist mt-5">
+                    <div class="container" style="margin-left:130px" >
+                        <h1 class="text-left text-white">Playlist</h1>
+                        <div class="row">
+                            {% for song in songs %}
+                            <div class="col-md-4" style="padding: 20px">
+                                <div class="card h-100">
+                                    <img src="{% static "music.png" %}" class="card-img-top" alt="...">
+                                    <div class="play">
+                                        <span class="fa fa-play"></span>
+                                    </div>
+                                    <div class="card-body" >
+                                        <h5 class="card-title">{{ song.song_title }}</h5>
+                                        <p class="card-text">{{ song.artist_name }}</p>
+                                        <p class="card-text">{{ song.album_name }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-<script src="https://kit.fontawesome.com/23cecef777.js" crossorigin="anonymous"></script>
+    {% include "footer.html" %}
 </body>
 </html>
-{% endblock main %} 
-{% include "footer.html" %}

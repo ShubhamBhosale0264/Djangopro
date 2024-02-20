@@ -5,31 +5,45 @@
 {% block css %}
 <link rel="stylesheet" href="{% static "index.css" %}">
 <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
+<style>
+    h1, h2, p {
+        color: white;
+    }
+    .content-wrapper {
+        margin-left: 250px; /* Width of the sidebar */
+    }
+    .about-section {
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.7); /* Adjust background color as needed */
+        border-radius: 10px;
+        margin-top: 20px; /* Adjust margin as needed */
+    }
+</style>
 {% endblock %}
-<body style="background-color: black;">
-    <h1 style="color: white">About Playsink</h1>
-    <b>_________________________________________________________________________________________________________________________________________________________________</b>
+<body style="background-image: url('{% static "playsinkpro.jpg" %}')">
+    <div class="content-wrapper">
+        <h1 style="color:white;text-align:center">About Playsink</h1>
 
-<section class="about-section">
-    <h2 style="color: white;">Welcome to Playsink</h2>
-    <b>_________________________________________________________________________________________________________________________________________________________________</b>
-    <p style="color: white">Playsink platform revolutionized music listening forever when we launched in 2008. Our move into podcasting
-        brought innovation and a new generation of listeners to the medium, and in 2022 we entered the next audio market
-        primed for growth with the addition of audiobooks.
+        <section class="about-section">
+            <h2 style="color:white;text-align:center">Welcome to Playsink</h2>
+            <p>Playsink platform revolutionized music listening forever when we launched in 2008. Our move into podcasting
+                brought innovation and a new generation of listeners to the medium, and in 2022 we entered the next audio market
+                primed for growth with the addition of audiobooks.
 
-        Today, more listeners than ever can discover, manage, and enjoy over 100 million tracks, 5 million podcasts
-        titles, and 350,000 audiobooks a la carte on Spotify. We are the world’s most popular audio streaming
-        subscription service with more than 602 million users, including 236 million subscribers in more than 180
-        markets.
-    </p>
+                Today, more listeners than ever can discover, manage, and enjoy over 100 million tracks, 5 million podcasts
+                titles, and 350,000 audiobooks a la carte on Spotify. We are the world’s most popular audio streaming
+                subscription service with more than 602 million users, including 236 million subscribers in more than 180
+                markets.
+            </p>
 
-    <p style="color: white">Legal Name: Bigtree Entertainment Pvt. Ltd. Headquarters: Mumbai, Maharashtra, India Business Model: B2C Founding
-        Date: Jul 1999 No. of Employees: 1000+
-    </p>
-    
-    <p style="color: white">Read more at:<a href="https://newsroom.spotify.com/company-info/">
-        https://newsroom.playsin.com/company-info/</a></p>
-</section>
+            <p>Legal Name: Bigtree Entertainment Pvt. Ltd. Headquarters: Mumbai, Maharashtra, India Business Model: B2C Founding
+                Date: Jul 1999 No. of Employees: 1000+
+            </p>
+            
+            <p>Read more at:<a href="https://newsroom.spotify.com/company-info/">
+                https://newsroom.playsin.com/company-info/</a></p>
+        </section>
+    </div>
 </body>
 {% endblock main %}
 

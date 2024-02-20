@@ -18,7 +18,7 @@ active
 {% endblock %} -->
 
 {% block main %}
-<body class="col-md-12" style="background-color: black;">
+<body style="margin-left: 250px; background:#3b3564">
     <div class="playlist__banner">
 
         <div class="playlist__left">
@@ -26,7 +26,7 @@ active
                 <img src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png" alt="" class="playlist__img">
             </div>
         </div>
-        <div class="playlist__right">
+        <div class="playlist__right" >
             <div style='font-weight: 700;font-size: 12px;'>PLAYLIST</div>
             <div class="playlist__name">Your Playlist</div>
             <div>{{ request.user }}<span class='grey_text'> &nbsp {{user_playlist.count}} Songs<span></div>

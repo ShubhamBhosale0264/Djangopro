@@ -9,7 +9,9 @@ urlpatterns = [
     path('playlist',views.playlist),
     path('search',views.search),
     path('about',views.about),
-    path('catfilter/<cv>',views.songfilter),
+    # path('catfilter/<cv>',views.songfilter),
+    path('sort/<sv>',views.sort),
+
 
 
 ]
