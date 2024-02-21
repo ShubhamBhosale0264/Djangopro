@@ -19,20 +19,22 @@
                         <h1 class="text-left text-white">Playlist</h1>
                         <div class="row">
                             {% for song in songs %}
-                            <div class="col-md-4" style="padding: 20px">
-                                <div class="card h-100">
-                                    <img src="{% static "music.png" %}" class="card-img-top" alt="...">
-                                    <div class="play">
-                                        <span class="fa fa-play"></span>
-                                    </div>
-                                    <div class="card-body" >
-                                        <h5 class="card-title">{{ song.song_title }}</h5>
-                                        <p class="card-text">{{ song.artist_name }}</p>
-                                        <p class="card-text">{{ song.album_name }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
+<div class="col-md-4" style="padding: 20px">
+    <div class="card h-100">
+        <img src="{% static "music.png" %}" class="card-img-top" alt="...">
+        <div class="play">
+            <span class="fa fa-play"></span>
+        </div>
+        <div class="card-body" >
+            <h5 class="card-title">{{ song.song_title }}</h5>
+            <p class="card-text">{{ song.artist_name }}</p>
+            <p class="card-text">{{ song.album_name }}</p>
+            <button class="btn btn-primary play-btn">Play</button>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
                         </div>
                     </div>
                 </div>

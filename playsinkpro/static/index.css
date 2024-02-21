@@ -3,7 +3,7 @@
     margin: 0;
   }
   body {
-    background-image: url(/playsinkpro/static/playsinkpro.jpg);
+    /* background-image: url(/playsinkpro/static/playsinkpro.jpg);   */
     background-size: contain;
     image-resolution:  2dppx;
 
