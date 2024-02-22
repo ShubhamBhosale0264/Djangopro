@@ -27,6 +27,9 @@ class Song(models.Model):
     album_name = models.CharField(max_length=100,verbose_name = "album")
     length = models.DurationField(verbose_name = "Duration")
     song_genre = models.ForeignKey(song_Genre,verbose_name = "Genre", on_delete=models.CASCADE)
+    pimage = models.ImageField(upload_to="image")
+    song_file = models.FileField(upload_to="songs")
+
     def __str__(self):
         return self.song_title
         return self.artist_name

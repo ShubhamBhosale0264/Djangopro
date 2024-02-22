@@ -19,22 +19,24 @@
                         <h1 class="text-left text-white">Playlist</h1>
                         <div class="row">
                             {% for song in songs %}
-<div class="col-md-4" style="padding: 20px">
-    <div class="card h-100">
-        <img src="{% static "music.png" %}" class="card-img-top" alt="...">
-        <div class="play">
-            <span class="fa fa-play"></span>
-        </div>
-        <div class="card-body" >
-            <h5 class="card-title">{{ song.song_title }}</h5>
-            <p class="card-text">{{ song.artist_name }}</p>
-            <p class="card-text">{{ song.album_name }}</p>
-            <button class="btn btn-primary play-btn">Play</button>
-        </div>
-    </div>
-</div>
-{% endfor %}
-
+                                <div class="col-md-4" style="padding: 20px">
+                                    <div class="card h-100">
+                                        <img src="{{song.pimage.url}}" class="card-img-top"  alt="...">
+                                        <div class="play">
+                                            <span class="fa fa-play"></span>
+                                        </div>
+                                        <div class="card-body" >
+                                            <h5 class="card-title">{{ song.song_title }}</h5>
+                                            <p class="card-text">{{ song.artist_name }}</p>
+                                            <p class="card-text">{{ song.album_name }}</p>
+                                            <button class="btn btn-primary play-btn" data-song-url="{{song.song_file.url}}">Play</button>
+                                            <button class="btn btn-primary pause-btn" data-song-url="{{song.song_file.url}}">Pause</button>
+                                            <input type="range" class="seek-bar" min="0" max="100" value="0">
+                                            <span class="start-time"></span> - <span class="end-time"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -43,5 +45,62 @@
     </div>
 
     {% include "footer.html" %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var currentAudio = null;
+            var seekBar = null;
+            var startTime = null;
+            var endTime = null;
+            var pausedTime = 0;
+
+            $('.play-btn').click(function() {
+                var songUrl = $(this).data('song-url');
+                if (currentAudio && !currentAudio.paused) {
+                    pausedTime = currentAudio.currentTime;
+                    currentAudio.pause();
+                    seekBar.off('input');
+                }
+                currentAudio = new Audio(songUrl);
+                currentAudio.currentTime = pausedTime;
+                currentAudio.play();
+
+                seekBar = $(this).closest('.card-body').find('.seek-bar');
+                startTime = $(this).closest('.card-body').find('.start-time');
+                endTime = $(this).closest('.card-body').find('.end-time');
+
+                // Update seek bar position based on current playback time
+                currentAudio.addEventListener('timeupdate', function() {
+                    var position = currentAudio.currentTime / currentAudio.duration;
+                    seekBar.val(position * 100);
+                    updateTimes();
+                });
+
+                // Seek to different position in audio track when seek bar value changes
+                seekBar.on('input', function() {
+                    var seekTime = currentAudio.duration * (this.value / 100);
+                    currentAudio.currentTime = seekTime;
+                    updateTimes();
+                });
+            });
+            
+            $('.pause-btn').click(function() {
+                if (currentAudio) {
+                    pausedTime = currentAudio.currentTime;
+                    currentAudio.pause();
+                    seekBar.off('input');
+                }
+            });
+
+            function updateTimes() {
+                var currentMinutes = Math.floor(currentAudio.currentTime / 60);
+                var currentSeconds = Math.floor(currentAudio.currentTime % 60);
+                var durationMinutes = Math.floor(currentAudio.duration / 60);
+                var durationSeconds = Math.floor(currentAudio.duration % 60);
+                startTime.text(currentMinutes + ':' + (currentSeconds < 10 ? '0' : '') + currentSeconds);
+                endTime.text(durationMinutes + ':' + (durationSeconds < 10 ? '0' : '') + durationSeconds);
+            }
+        });
+    </script>
 </body>
 </html>

@@ -47,7 +47,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 def artist(request):
     arjit_uri = 'https://open.spotify.com/artist/4YRxDV8wJFPHPTeXepOstw?si=3vxC0MHVRk-2fdNeMmMjXA'
     spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id="2c7daa9910a04bba9a3081bbaf95b0e1",
-                                                                                   client_secret="dec4577d552e4d23be76054528599064"))
+                        client_secret="dec4577d552e4d23be76054528599064"))
     results = spotify.artist_albums(arjit_uri, album_type='album')
     albums = results['items']
     while results['next']:

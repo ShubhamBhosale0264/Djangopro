@@ -1,3 +1,5 @@
+from playsinkpro import settings
+from django.conf.urls.static import static
 from django.urls import path
 from playsinkapp import views
 
@@ -9,7 +11,7 @@ urlpatterns = [
     path('playlist',views.playlist),
     path('artist',views.artist),
     path('about',views.about),
-
-
-
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MUSIC_URL, document_root=settings.MUSIC_ROOT)  
