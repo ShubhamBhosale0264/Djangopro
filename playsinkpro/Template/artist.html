@@ -1,0 +1,44 @@
+{% load static %}
+{% include "header.html" %}
+{% block css %}
+<link rel="stylesheet" href="{% static "index.css" %}">
+<link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
+{% endblock %}
+
+
+
+{% block main %}
+<body style="background-image: url('{% static "playsinkpro.jpg" %}'); margin-left: 250px;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artist Albums</title>
+    <style>
+        /* Add your custom CSS here */
+        body {
+            margin-left: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 style="color: beige;text-align: center;">Arjit Singh</h1>
+        <div class="row">
+            {% for album_name in album_names %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ album_name }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+</body>
+</html>
+
+{% endblock %}
+<!-- {% include "footer.html" %} -->

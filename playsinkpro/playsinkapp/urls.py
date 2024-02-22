@@ -7,10 +7,8 @@ urlpatterns = [
     path('logout',views.user_logout),
     path('register',views.register),
     path('playlist',views.playlist),
-    path('search',views.search),
+    path('artist',views.artist),
     path('about',views.about),
-    # path('catfilter/<cv>',views.songfilter),
-    path('sort/<sv>',views.sort),
 
 
 

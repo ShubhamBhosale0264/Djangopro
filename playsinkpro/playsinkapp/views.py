@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.db import IntegrityError
 from django.db.models import Q
+from spotipy.oauth2 import SpotifyClientCredentials
 
 from .models import Song
 
@@ -40,8 +41,21 @@ def user_logout(request):
 def playlist(request):
     return render(request, 'playlist.html')
 
-def search(request):
-    return render(request, 'search.html')
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+
+def artist(request):
+    arjit_uri = 'https://open.spotify.com/artist/4YRxDV8wJFPHPTeXepOstw?si=3vxC0MHVRk-2fdNeMmMjXA'
+    spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id="2c7daa9910a04bba9a3081bbaf95b0e1",
+                                                                                   client_secret="dec4577d552e4d23be76054528599064"))
+    results = spotify.artist_albums(arjit_uri, album_type='album')
+    albums = results['items']
+    while results['next']:
+        results = spotify.next(results)
+        albums.extend(results['items'])
+    album_names = [album['name'] for album in albums]
+    return render(request, 'artist.html', {'album_names': album_names})
+
 
 def register(request):
     if request.method == 'POST':
@@ -65,17 +79,3 @@ def register(request):
                 return render(request, 'register.html', {'errormsg': errormsg})
     else:
         return render(request, 'register.html')
-# def songfilter(request, genre):
-#     q = Q(song_genre__name=genre)
-#     songs = Song.objects.filter(q)
-#     context = {'songs': songs}
-#     return render(request, 'index.html', context)
-def sort (request,sv):
-    if sv =='0':
-        col  = 'price'
-    else :
-        col = '-price'
-    p = Song.objects.order_by('length')
-    context = {}
-    context['song'] = p
-    return render(request,"index.html",context)
