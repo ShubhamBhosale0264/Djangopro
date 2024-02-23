@@ -12,18 +12,22 @@ class song_Genre(models.Model):
     
 
 
-class song_Artist(models.Model):
-    artist_name = models.CharField(max_length=100, verbose_name = "artist")
-    song_name = models.CharField(max_length=100, verbose_name = "song")
+from django.db import models
+
+class Song_Artist(models.Model):
+    artist_name = models.CharField(max_length=100, verbose_name="Artist")
+    song_name = models.CharField(max_length=100, verbose_name="Song")
+    category = models.CharField(max_length=100, verbose_name="Category")
+
     def __str__(self):
-        return self.artist_name
-        return self.song_name
+        return f"{self.artist_name} - {self.song_name}"
+
 
 class Song(models.Model):
     CAT = ((1,"Romantic"),(2,"Motivational"),(3,"Sad"),(4,"energetic"),(5,"pop"))
 
     song_title = models.CharField(max_length=100,verbose_name = "title")
-    artist_name = models.ForeignKey(song_Artist, verbose_name = "artist",on_delete=models.CASCADE)
+    artist_name = models.ForeignKey(Song_Artist, verbose_name = "artist",on_delete=models.CASCADE)
     album_name = models.CharField(max_length=100,verbose_name = "album")
     length = models.DurationField(verbose_name = "Duration")
     song_genre = models.ForeignKey(song_Genre,verbose_name = "Genre", on_delete=models.CASCADE)
