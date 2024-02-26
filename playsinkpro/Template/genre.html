@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Songs by Genre</title>
+    <link rel="stylesheet" href="{% static "index.css" %}">
+    <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
+    <style>
+        .song-list {
+            display: none;
+        }
+    </style>
+</head>
+<body style="background-color:#0c0d0f">
+    {% include "header.html" %}
+    
+    <div class="container-fluid" style="background-image: url('{% static "playsinkpro.jpg" %}'); margin-top: -60px;">
+        <div class="row justify-content-center">
+            <div class="col-md-10 shadow mt-1">
+                <div class="playlist mt-5">
+                    <div class="container" style="margin-left:130px" >
+                        <h1 class="text-left text-white">Songs By Genre</h1>
+                        <div class="row" id="genre-cards">
+                            {% for genre in genres %}
+                                <div class="col-md-4" style="padding: 20px">
+                                    <div class="card h-100 genre-card" data-genre-id="{{ genre.id }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ genre.name }}</h5>
+                                            <div class="song-list">
+                                                <h6 class="card-subtitle mb-2 text-muted">Songs:</h6>
+                                                {% for song in genre.song_genre.all %}
+                                                    <div class="song">
+                                                        <p>{{ song.song_name }} - {{ song.artist_name }}</p>
+                                                        <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
+                                                        <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "footer.html" %}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.genre-card').click(function() {
+                // Toggle the display of the song list for the clicked card
+                $(this).find('.song-list').slideToggle();
+                // Collapse song lists of other cards
+                $('.genre-card').not(this).find('.song-list').slideUp();
+    
+                // Enable the clicked card and disable others
+                $('.genre-card').removeClass('active');
+                $(this).addClass('active');
+                $('.genre-card').not('.active').removeClass('disabled');
+            });
+    
+            var currentAudio = null;
+    
+            $('.play-btn').click(function(e) {
+                // Prevent the click event from bubbling up to the genre card
+                e.stopPropagation();
+    
+                // If another song is currently playing, stop it
+                if (currentAudio && !currentAudio.paused) {
+                    currentAudio.pause();
+                }
+    
+                var songUrl = $(this).data('song-url');
+                currentAudio = new Audio(songUrl);
+                currentAudio.play();
+            });
+    
+            $('.pause-btn').click(function(e) {
+                // Prevent the click event from bubbling up to the genre card
+                e.stopPropagation();
+    
+                // Pause the current song
+                if (currentAudio) {
+                    currentAudio.pause();
+                }
+            });
+        }); 
+    </script>
+    </body>
+</html>

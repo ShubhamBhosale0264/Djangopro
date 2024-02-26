@@ -7,8 +7,7 @@ from django.db import IntegrityError
 from django.db.models import Q
 # from spotipy.oauth2 import SpotifyClientCredentials
 from .models import Song_Artist
-
-
+from .models import song_Genre
 from .models import Song
 
 
@@ -49,7 +48,12 @@ import spotipy
 def artist(request):
     artists = Song_Artist.objects.order_by('artist_name')
     context = {'artists': artists}
-    return render(request, 'artist.html', context)
+
+
+def genre_songs(request):
+    genres = song_Genre.objects.all()
+    return render(request, 'genre.html', {'genres': genres})
+
 
 
 def register(request):

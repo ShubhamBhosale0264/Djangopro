@@ -10,6 +10,7 @@ urlpatterns = [
     path('register',views.register),
     path('playlist',views.playlist),
     path('artist',views.artist),
+    path('genre',views.genre_songs),
     path('about',views.about),
 ]
 if settings.DEBUG:
