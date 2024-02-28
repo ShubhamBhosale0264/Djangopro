@@ -35,6 +35,9 @@
                                                         <p>{{ song.song_title }}</p>
                                                         <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
                                                         <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
+                                                        {% if user.is_authenticated %}
+                                                            <button class="btn btn-success add-to-playlist-btn" data-song-id="{{ song.id }}">Add to Playlist</button>
+                                                        {% endif %}
                                                     </div>
                                                 {% endfor %}
                                             </div>

@@ -43,11 +43,11 @@ def user_logout(request):
 def playlist(request):
     return render(request, 'playlist.html')
 
-import spotipy
 
 def artist(request):
     artists = Song_Artist.objects.order_by('artist_name')
     context = {'artists': artists}
+    return render(request, 'artist.html', {'artists': artists})
 
 
 def genre_songs(request):
