@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render,HttpResponse
 from django.views import View
-from spotipy.oauth2 import SpotifyClientCredentials
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.db import IntegrityError

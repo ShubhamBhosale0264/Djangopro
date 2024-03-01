@@ -42,12 +42,9 @@ class Song(models.Model):
         return self.song_genre
 
 
-class Playlist(models.Model):
-    name = models.CharField(max_length=100,verbose_name = "name")
+class User_Playlist(models.Model):
     user = models.ForeignKey(User,verbose_name = "user_name" ,on_delete=models.CASCADE)
-    songs = models.ManyToManyField(Song)
-    def __str__(self):
-        return self.name
-        return self.user
-        return self.songs
+    songs = models.ForeignKey(Song,verbose_name = "songs_name", on_delete=models.CASCADE)
+def __str__(self):
+    return f"{self.user.username}'s Playlist: {self.songs.song_title}"
 
