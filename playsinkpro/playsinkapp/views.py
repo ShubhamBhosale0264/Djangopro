@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.db import IntegrityError
 from django.db.models import Q
 # from spotipy.oauth2 import SpotifyClientCredentials
-from .models import Song_Artist
+from .models import Song_Artist, User_Playlist
 from .models import song_Genre
 from .models import Song
 
@@ -77,3 +77,16 @@ def register(request):
                 return render(request, 'register.html', {'errormsg': errormsg})
     else:
         return render(request, 'register.html')
+def add_to_playlist(request, song_id):
+    if request.method == 'GET':
+        song = Song.objects.get(pk=song_id)
+        user = request.user
+        playlist_songs = user.user_playlist_set.all()
+        if playlist_songs.filter(songs=song).exists():
+            msg = "Song already exists in your playlist."
+        else:
+            User_Playlist.objects.create(user=user, songs=song)
+            msg = "Song added to your playlist successfully."
+        return render(request, 'playlist.html', {'msg': msg})
+    else:
+        return redirect('/login')

@@ -12,6 +12,8 @@ urlpatterns = [
     path('artist',views.artist),
     path('genre',views.genre_songs),
     path('about',views.about),
+    path('add_to_playlist/<int:song_id>/', views.add_to_playlist, name='add_to_playlist'),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
