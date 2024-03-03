@@ -32,11 +32,11 @@
                                             <h6 class="card-subtitle mb-2 text-muted">Songs:</h6>
                                             {% for song in genre.song_set.all %}
                                                 <div class="song">
-                                                    <p>{{ song.song_title }}</p>
+                                                    <p><b>{{ song.song_title }}</b></p>
                                                     <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
                                                     <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
                                                     {% if user.is_authenticated %}
-                                                        <button class="btn btn-success add-to-playlist-btn" data-song-id="{{ song.id }}">Add to Playlist</button>
+                                                        <button class="btn btn-info add-to-playlist-btn"  data-song-id="{{ song.id }}">Add to Playlist</button>
                                                     {% endif %}
                                                 </div>
                                             {% endfor %}
