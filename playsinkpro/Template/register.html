@@ -12,12 +12,12 @@
         <h3 style="text-align: center;color:white;" >User Registration</h3>
         <form method="POST" action="" style="align-items: center; max-width: 400px; margin: 0 auto;">
             {% csrf_token %}
-            {% if errormsg %}
+            {% if    errormsg %}
                 <div class="alert alert-danger">{{ errormsg }}</div>
             {% endif %}
             <div class="mb-3">
                 <label for="input1" class="form-label"style="color:white">User Name</label>
-                <input type="text" class="form-control" id="input1" name="uname" placeholder="Enter your E-Mail">
+                <input type="text" class="form-control" id="input1" name="uname" placeholder="Enter your UserName">
             </div>
             <div class="mb-3">
                 <label for="input2" class="form-label"style="color:white">Password</label>

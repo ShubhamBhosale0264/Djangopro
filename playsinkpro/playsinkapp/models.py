@@ -12,8 +12,6 @@ class song_Genre(models.Model):
     
 
 
-from django.db import models
-
 class Song_Artist(models.Model):
     artist_name = models.CharField(max_length=100, verbose_name="Artist")
     song_name = models.CharField(max_length=100, verbose_name="Song")
