@@ -16,26 +16,28 @@
             <div class="col-md-10 shadow mt-1">
                 <div class="playlist mt-5">
                     <div class="container" style="margin-left:130px" >
-                        <h1 class="text-left text-white">Playlist</h1>
+                        <h1 class="text-left text-white">{{ user.username }}'s Playlist</h1>
                         <div class="row">
-                            {% for user_playlist in user.user_playlist.all %}
-                                <div class="col-md-4" style="padding: 20px">
-                                    <div class="card h-100">
-                                        <img src="{{ user_playlist.songs.song_image.url }}" class="card-img-top" alt="...">
-                                        <div class="play">
-                                            <span class="fa fa-play"></span>
-                                        </div>
-                                        <div class="card-body" >
-                                            <h5 class="card-title">{{ user_playlist.song_title }}</h5>
-                                            <p class="card-text">{{ user_playlist.artist_name }}</p>
-                                            <p class="card-text">{{ user_playlist.album_name }}</p>
-                                            <button class="btn btn-primary play-btn" data-song-url="{{ user_playlist.songs.song_file.url }}">Play</button>
-                                            <button class="btn btn-primary pause-btn" data-song-url="{{ user_playlist.songs.song_file.url }}">Pause</button>
-                                            <input type="range" class="seek-bar" min="0" max="100" value="0">
-                                            <span class="start-time"></span><span class="end-time"></span>
+                            {% for user_playlist in user.user_playlist_set.all %}
+                                {% with song=user_playlist.songs %}
+                                    <div class="col-md-4" style="padding: 20px">
+                                        <div class="card h-100">
+                                            <img src="{{ song.pimage.url }}" class="card-img-top" alt="...">
+                                            <div class="play">
+                                                <span class="fa fa-play"></span>
+                                            </div>
+                                            <div class="card-body" >
+                                                <h5 class="card-title">{{ song.song_title }}</h5>
+                                                <p class="card-text">{{ song.artist_name }}</p>
+                                                <p class="card-text">{{ song.album_name }}</p>
+                                                <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
+                                                <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
+                                                <input type="range" class="seek-bar" min="0" max="100" value="0">
+                                                <span class="start-time"></span><span class="end-time"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                {% endwith %}
                             {% endfor %}
                         </div>
                     </div>
