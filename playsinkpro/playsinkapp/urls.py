@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.urls import path
 from playsinkapp import views
 from django.contrib import admin
-admin.site.site_header = "Welcome to PlaysinkPro"
+admin.site.site_header = "Welcome Shuhbham to PlaysinkPro"
 admin.site.index_title = "Admin Database"
 
 
