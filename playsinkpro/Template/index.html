@@ -72,14 +72,12 @@
                 startTime = $(this).closest('.card-body').find('.start-time');
                 endTime = $(this).closest('.card-body').find('.end-time');
 
-                // Update seek bar position based on current playback time
                 currentAudio.addEventListener('timeupdate', function() {
                     var position = currentAudio.currentTime / currentAudio.duration;
                     seekBar.val(position * 100);
                     updateTimes();
                 });
 
-                // Seek to different position in audio track when seek bar value changes
                 seekBar.on('input', function() {
                     var seekTime = currentAudio.duration * (this.value / 100);
                     currentAudio.currentTime = seekTime;
