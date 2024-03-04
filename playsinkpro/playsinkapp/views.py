@@ -12,6 +12,8 @@ from .models import Song
 
 def home(request):
     songs = Song.objects.all() 
+    songs = Song.objects.order_by('song_title')
+
     return render(request, 'index.html', {'songs': songs})
 def about(request):
     return render(request, 'about.html')
