@@ -29,7 +29,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{ artist.artist_name }}</h5>
                                             <div class="song-list">
-                                                <h6 class="card-subtitle mb-2 text-muted">Songs:</h6>
+                                                <h6 class="card-subtitle mb-2 text-muted"><b>Songs:</b></h6>
                                                 {% for song in artist.song_set.all %}
                                                     <div class="song">
                                                         <p><b>{{ song.song_title }}</b></p>
@@ -58,24 +58,16 @@
     <script>
         $(document).ready(function() {
             $('.artist-card').click(function() {
-                // Toggle the display of the song list for the clicked card
-                $(this).find('.song-list').slideToggle();
-                // Collapse song lists of other cards
-                $('.artist-card').not(this).find('.song-list').slideUp();
-    
-                // Enable the clicked card and disable others
-                $('.artist-card').removeClass('active');
-                $(this).addClass('active');
-                $('.artist-card').not('.active').addClass('disabled');
+                var songList = $(this).find('.song-list');
+                songList.slideToggle();
+                $('.song-list').not(songList).slideUp();
             });
     
             var currentAudio = null;
     
             $('.play-btn').click(function(e) {
-                // Prevent the click event from bubbling up to the artist card
                 e.stopPropagation();
                 
-                // If another song is currently playing, stop it
                 if (currentAudio && !currentAudio.paused) {
                     currentAudio.pause();
                 }
@@ -86,18 +78,12 @@
             });
     
             $('.pause-btn').click(function(e) {
-                // Prevent the click event from bubbling up to the artist card
                 e.stopPropagation();
-                
-                // Pause the current song
                 if (currentAudio) {
                     currentAudio.pause();
                 }
             });
         }); 
     </script>
-    
-    
-    
 </body>
 </html>
