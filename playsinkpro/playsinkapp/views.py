@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.db import IntegrityError
 from django.db.models import Q
-# from spotipy.oauth2 import SpotifyClientCredentials
 from .models import Song_Artist, User_Playlist
 from .models import song_Genre
 from .models import Song
@@ -92,3 +91,16 @@ def add_to_playlist(request, song_id):
         return render(request, 'playlist.html', {'msg': msg})
     else:
         return redirect('/login')
+def remove_from_playlist(request, song_id):
+    if request.method == 'GET':
+        user = request.user
+        try:
+            playlist_song = User_Playlist.objects.get(user=user, songs_id=song_id)
+            playlist_song.delete()
+            msg = "Song removed from your playlist successfully."
+        except User_Playlist.DoesNotExist:
+            msg = "Song does not exist in your playlist."
+        return redirect('/playlist', {'msg': msg})
+    else:
+        return redirect('/login')
+

@@ -7,24 +7,25 @@
 <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
 <link rel="stylesheet" href="{% static "register.css" %}">
 {% endblock %}
-<body style="background-image: url('{% static "playsinkpro.jpg" %}')">
-    <div class="container"style="border-color: black;">
-        <h3 style="text-align: center;color:white;" >User Registration</h3>
+<body style="background-color: black;">
+    <div class="container" style="border-color: black; margin-left: 250px;">
+        <h3 style="text-align: center; color: white;">User Registration</h3>
+        <h5 style="text-align: center; color: white;">Register To our Free Music Platform</h5>
         <form method="POST" action="" style="align-items: center; max-width: 400px; margin: 0 auto;">
             {% csrf_token %}
-            {% if    errormsg %}
+            {% if errormsg %}
                 <div class="alert alert-danger">{{ errormsg }}</div>
             {% endif %}
             <div class="mb-3">
-                <label for="input1" class="form-label"style="color:white">User Name</label>
+                <label for="input1" class="form-label" style="color: white;">User Name</label>
                 <input type="text" class="form-control" id="input1" name="uname" placeholder="Enter your UserName">
             </div>
             <div class="mb-3">
-                <label for="input2" class="form-label"style="color:white">Password</label>
+                <label for="input2" class="form-label" style="color: white;">Password</label>
                 <input type="password" class="form-control" id="input2" name="upass" placeholder="Enter Password">
             </div>
             <div class="mb-3">
-                <label for="input3" class="form-label"style="color:white">Confirm Password</label>
+                <label for="input3" class="form-label" style="color: white;">Confirm Password</label>
                 <input type="password" class="form-control" id="input3" name="ucpass" placeholder="Confirm Password">
             </div>
             <button type="submit" class="btn btn-success">Register</button>
@@ -36,3 +37,4 @@
 </body>
 {% endblock main %}
 {% include "footer.html" %}
+    
