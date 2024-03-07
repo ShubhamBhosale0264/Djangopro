@@ -18,6 +18,9 @@ urlpatterns = [
     path('genre',views.genre_songs),
     path('about',views.about),
     path('add_to_playlist/<int:song_id>/', views.add_to_playlist, name='add_to_playlist'),
+    path('cookies',views.cooki),
+    path('legal',views.lgl),
+    path('privacy',views.privacy),
 
 
 ]

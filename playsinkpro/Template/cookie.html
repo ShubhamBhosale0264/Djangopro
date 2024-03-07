@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies Policy</title>
+    <link rel="stylesheet" href="{% static "index.css" %}">
+    <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
+    <style>
+        body {
+            font-family: 'Times New Roman';
+            margin: 0;
+            padding: 0;
+            background-color: #0c0d0f;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        h1, h2 {
+            color: #fff;
+        }
+        p {
+            line-height: 1.6;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    {% include "header.html" %}
+    
+    <div class="container"style="margin-left: 250px;">
+        <h1 style = "text-align: center; font-family: 'Times New Roman';">Cookies Policy</h1>
+        
+        <h2 style = "font-family: Times New Roman;">What are cookies?</h2>
+        <p>Cookies are small text files that are stored in your web browser that allows the website to recognize you. Cookies can be used to collect, store, and share bits of information about your activities across websites, including on the website.</p>
+
+        <h2 style = "font-family: Times New Roman;">How do we use cookies?</h2>
+        <p>We use cookies to understand and save your preferences for future visits and compile aggregate data about site traffic and site interaction so that we can offer better site experiences and tools in the future. We may also use trusted third-party services that track this information on our behalf.</p>
+    </div>
+
+    {% include "footer.html" %}
+</body>
+</html>

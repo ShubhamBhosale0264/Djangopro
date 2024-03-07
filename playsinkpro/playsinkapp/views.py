@@ -42,6 +42,12 @@ def user_logout(request):
 
 def playlist(request):
     return render(request, 'playlist.html')
+def cooki(request):
+    return render(request, 'cookie.html')
+def lgl(request):
+    return render(request, 'lgl.html')
+def privacy(request):
+    return render(request, 'pvc.html')
 
 
 def artist(request):

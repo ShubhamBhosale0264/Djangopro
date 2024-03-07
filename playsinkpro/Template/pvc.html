@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        h1, h2 {
+            color: #fff;
+        }
+        p {
+            line-height: 1.6;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    {% include "header.html" %}
+    
+    <div class="container" style="margin-left: 250px;">
+        <h1 style="font-family:'Times New Roman';text-align:center;">Privacy Policy</h1>
+        
+        <h2 style="font-family:'Times New Roman';">Information We Collect</h2>
+        <p>We may collect personal information from you such as your name, email address, postal address, phone number, username, and password when you register on our website or fill out a form. We may also collect non-personal information such as your browser type, operating system, IP address, and the domain name of your Internet service provider.</p>
+
+        <h2 style="font-family:'Times New Roman';">How We Use Your Information</h2>
+        <p>We may use the information we collect from you to personalize your experience, improve our website, process transactions, send periodic emails, and provide customer service. Your information, whether public or private, will not be sold, exchanged, transferred, or given to any other company for any reason whatsoever, without your consent, other than for the express purpose of delivering the purchased product or service requested by you.</p>
+
+        <h2 style="font-family:'Times New Roman';">Third-Party Links</h2>
+        <p>We may include or offer third-party products or services on our website. These third-party sites have separate and independent privacy policies. We have no responsibility or liability for the content and activities of these linked sites.</p>
+
+        <h2 style="font-family:'Times New Roman';">Changes to Our Privacy Policy</h2>
+        <p>If we decide to change our privacy policy, we will post those changes on this page.</p>
+    </div>
+
+    {% include "footer.html" %}
+</body>
+</html>

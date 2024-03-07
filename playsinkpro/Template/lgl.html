@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Notice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        h1, h2 {
+            color: #fff;
+        }
+        p {
+            line-height: 1.6;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    {% include "header.html" %}
+    
+    <div class="container"style="margin-left: 250px;">
+        <h1 style = "text-align: center;font-family: 'Times New Roman';">Legal Notice</h1>
+        
+        <h2 style = "font-family: 'Times New Roman';">Disclaimer</h2>
+        <p style = "font-family: 'Segoe UI';">This website and its content are provided for informational purposes only. We do not guarantee the accuracy, completeness, or usefulness of any information provided on this site. Any reliance you place on such information is strictly at your own risk.</p>
+
+        <h2 style = "font-family: 'Times New Roman';">Terms of Use</h2>
+        <p style = "font-family: 'Segoe UI';">By accessing this website, you agree to be bound by these terms of use, all applicable laws, and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site.</p>
+
+        <h2 style = "font-family: 'Times New Roman';">Copyright</h2>
+        <p style = "font-family: 'Segoe UI';">All content and materials available on this site, including but not limited to text, graphics, website name, code, images, and logos, are the intellectual property of [Your Company] and are protected by applicable copyright and trademark law.</p>
+
+        <h2 style = "font-family: 'Times New Roman';">Privacy Policy</h2>
+        <p style = "font-family: 'Segoe UI';">Our website respects your privacy and is committed to protecting it. Our Privacy Policy outlines the types of personal information we collect and how it is used, as well as your choices regarding your information. By using this website, you consent to the terms of our Privacy Policy.</p>
+    </div>
+
+    {% include "footer.html" %}
+</body>
+</html>
