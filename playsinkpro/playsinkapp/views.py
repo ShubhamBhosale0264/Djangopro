@@ -109,4 +109,14 @@ def remove_from_playlist(request, song_id):
         return redirect('/playlist', {'msg': msg})
     else:
         return redirect('/login')
+def search_song(request):
+    if request.method == 'GET':
+        search_term = request.GET.get('search')
+        if search_term:
+            searched_songs = Song.objects.filter(song_title__icontains=search_term)
+            return render(request, 'search_results.html', {'searched_songs': searched_songs, 'search_term': search_term})
+        else:
+            return render(request, 'search_results.html', {'error_message': 'Please enter a search term.'})
+    else:
+        return render(request, 'search_results.html', {'error_message': 'Invalid request method.'})
 

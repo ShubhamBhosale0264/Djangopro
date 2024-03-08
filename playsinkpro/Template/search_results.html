@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "index.css" %}">
+    <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
+    <title>Song Search Results</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: black;
+            color: white;
+            width: 50%;
+            margin: auto;
+            padding-top: 20px;
+        }
+        .card-container {
+            background-color: black;
+            color: white;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .card {
+            background-color:black;
+      
+        }
+        .card-body {
+            /* padding: 20px; */
+            background-color: black;
+            color: white;
+
+        }
+        .card-title {
+            margin-top: 0;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .card-text {
+            color: white;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        .btn {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .seek-bar {
+            width: 50%;
+        }
+        .start-time, .end-time {
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body style="background-color: black;">
+
+    {% include "header.html" %}
+
+    <div class="container" style="margin-left: 250px;" style="color:white">
+        <h1>Search Songs</h1>
+
+        <form action="/search_song" method="GET">
+            <input type="text" name="search" placeholder="Search for a song or artist">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% elif searched_songs %}
+            <div class="card-container">
+                {% for song in searched_songs %}
+                    <div class="card" style = "border:none">
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: white">{{ song.song_title }}</h5>
+                            <p class="card-text" style="color: white">{{ song.artist_name }}</p>
+                            <p class="card-text" style="color: white">{{ song.album_name }}</p>
+
+                            <button class="btn btn-primary play-btn" data-song-url="{{song.song_file.url}}">Play</button>
+                            <button class="btn btn-primary pause-btn" data-song-url="{{song.song_file.url}}">Pause</button>
+                            <input type="range" class="seek-bar" min="0" max="100" value="0">
+                            {% if user.is_authenticated %}
+                                <a href="/add_to_playlist/{{ song.id }}" class="btn btn-info" style="margin-top: 10px;">Add to Playlist</a>
+                            {% endif %}
+                            <span class="start-time"></span><span class="end-time"></span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No songs found.</p>
+        {% endif %}
+    </div>
+
+    {% include "footer.html" %}
+
+    <script>
+        $(document).ready(function() {
+            var currentAudio = null;
+            var seekBar = null;
+            var startTime = null;
+            var endTime = null;
+            var pausedTime = 0;
+
+            $('.play-btn').click(function() {
+                var songUrl = $(this).data('song-url');
+                if (currentAudio && !currentAudio.paused) {
+                    pausedTime = currentAudio.currentTime;
+                    currentAudio.pause();
+                    seekBar.off('input');
+                }
+                currentAudio = new Audio(songUrl);
+                currentAudio.currentTime = pausedTime;
+                currentAudio.play();
+
+                seekBar = $(this).closest('.card-body').find('.seek-bar');
+                startTime = $(this).closest('.card-body').find('.start-time');
+                endTime = $(this).closest('.card-body').find('.end-time');
+
+                currentAudio.addEventListener('timeupdate', function() {
+                    var position = currentAudio.currentTime / currentAudio.duration;
+                    seekBar.val(position * 100);
+                    updateTimes();
+                });
+
+                seekBar.on('input', function() {
+                    var seekTime = currentAudio.duration * (this.value / 100);
+                    currentAudio.currentTime = seekTime;
+                    updateTimes();
+                });
+            });
+
+            $('.pause-btn').click(function() {
+                if (currentAudio) {
+                    pausedTime = currentAudio.currentTime;
+                    currentAudio.pause();
+                    seekBar.off('input');
+                }
+            });
+
+            function updateTimes() {
+                var currentMinutes = Math.floor(currentAudio.currentTime / 60);
+                var currentSeconds = Math.floor(currentAudio.currentTime % 60);
+                var durationMinutes = Math.floor(currentAudio.duration / 60);
+                var durationSeconds = Math.floor(currentAudio.duration % 60);
+                startTime.text(currentMinutes + ':' + (currentSeconds < 10 ? '0' : '') + currentSeconds);
+                endTime.text(durationMinutes + ':' + (durationSeconds < 10 ? '0' : '') + durationSeconds);
+            }
+        });
+    </script>
+</body>
+</html>

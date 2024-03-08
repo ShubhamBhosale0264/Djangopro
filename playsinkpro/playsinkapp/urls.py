@@ -21,6 +21,8 @@ urlpatterns = [
     path('cookies',views.cooki),
     path('legal',views.lgl),
     path('privacy',views.privacy),
+    path('search_song', views.search_song),
+
 
 
 ]
