@@ -120,3 +120,13 @@ def search_song(request):
     else:
         return render(request, 'search_results.html', {'error_message': 'Invalid request method.'})
 
+def create_playlist(request):
+    if request.method == 'POST':
+        playlist_name = request.POST.get('playlist_name')
+        if playlist_name:
+            # Create a new playlist for the current user
+            user = request.user
+            playlist = User_Playlist.objects.create(user=user, name=playlist_name)
+            # Redirect the user to the home page (index.html) or any other page as needed
+            return redirect('/home')  # Change the URL as needed
+    return render(request, 'create_playlist.html')
