@@ -56,7 +56,9 @@
             var startTime = null;
             var endTime = null;
             var pausedTime = 0;
-
+            var playTimeLimit = 30; // 30 seconds play time limit
+            var promptShown = false;
+    
             $('.play-btn').click(function() {
                 var songUrl = $(this).data('song-url');
                 if (currentAudio && !currentAudio.paused) {
@@ -67,32 +69,58 @@
                 currentAudio = new Audio(songUrl);
                 currentAudio.currentTime = pausedTime;
                 currentAudio.play();
-
+    
                 seekBar = $(this).closest('.card-body').find('.seek-bar');
                 startTime = $(this).closest('.card-body').find('.start-time');
                 endTime = $(this).closest('.card-body').find('.end-time');
-
+    
                 currentAudio.addEventListener('timeupdate', function() {
                     var position = currentAudio.currentTime / currentAudio.duration;
-                    seekBar.val(position * 100);
+                    if (currentAudio.currentTime > playTimeLimit) {
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0;
+                        position = 0;
+                        seekBar.val(0);
+                        if (!promptShown) {
+                            // Prompt user to subscribe
+                            if (confirm("To hear the full song, please subscribe!")) {
+                                // Redirect user to subscribe page or perform subscription action
+                                // Example: window.location.href = "/subscribe";
+                                promptShown = true;
+                            }
+                        }
+                    } else {
+                        seekBar.val(position * 100);
+                    }
                     updateTimes();
                 });
-
+    
                 seekBar.on('input', function() {
                     var seekTime = currentAudio.duration * (this.value / 100);
+                    if (seekTime > playTimeLimit) {
+                        seekTime = playTimeLimit;
+                    }
                     currentAudio.currentTime = seekTime;
                     updateTimes();
                 });
             });
-            
+    
             $('.pause-btn').click(function() {
                 if (currentAudio) {
+                    if (currentAudio.currentTime > playTimeLimit && !promptShown) {
+                        // Prompt user to subscribe
+                        if (confirm("To hear the full song, please subscribe!")) {
+                            // Redirect user to subscribe page or perform subscription action
+                            // Example: window.location.href = "/subscribe";
+                            promptShown = true;
+                        }
+                    }
                     pausedTime = currentAudio.currentTime;
                     currentAudio.pause();
                     seekBar.off('input');
                 }
             });
-
+    
             function updateTimes() {
                 var currentMinutes = Math.floor(currentAudio.currentTime / 60);
                 var currentSeconds = Math.floor(currentAudio.currentTime % 60);
@@ -103,5 +131,12 @@
             }
         });
     </script>
+    
+    
+    
+    
+    
+    
+    
 </body>
 </html>
