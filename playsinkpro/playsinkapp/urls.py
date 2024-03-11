@@ -22,7 +22,7 @@ urlpatterns = [
     path('legal',views.lgl),
     path('privacy',views.privacy),
     path('search_song', views.search_song),
-    path('create_playlist/', views.create_playlist, name='create_playlist'),
+    # path('create_playlist/', views.create_playlist, name='create_playlist'),
 
 
 
