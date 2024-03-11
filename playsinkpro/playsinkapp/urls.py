@@ -24,6 +24,8 @@ urlpatterns = [
     path('privacy',views.privacy),
     path('search_song', views.search_song),
     path('create_playlist/', views.create_playlist, name='create_playlist'),
+    path('donate',views.donate)
+
 
 
 

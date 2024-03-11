@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.db import IntegrityError
 from django.db.models import Q
+import razorpay
 from .models import Song_Artist, User_Playlist
 from .models import song_Genre
 from .models import Song
@@ -128,3 +129,16 @@ def create_playlist(request):
             playlist = User_Playlist.objects.create(user=user, name=playlist_name)
             return redirect('/home')  
     return render(request, 'create_playlist.html')
+def donate(request):
+    amount = 100
+    client = razorpay.Client(auth=("rzp_test_Wvov0HjeptFqcA", "Mh8izVNVkU5knxDcArypoquK"))
+    data = {
+        "amount": amount * 100,  
+        "currency": "INR",
+        "receipt": "Donation", 
+        "payment_capture": 1
+    }
+    payment = client.order.create(data=data)
+
+    context = {'payment': payment}
+    return render(request, 'pay.html', context)

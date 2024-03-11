@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fund Raising</title>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-VZ4t8lZJsrV2wD8ihJYDfSYuuA12FytKJPX+2gEUCmsxh4ryZwl0giU5ktbJn0qc" crossorigin="anonymous">
+<style>
+    #rzp-button1 {
+        background-color: #FF5733; 
+        color: white; 
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px; 
+        transition-duration: 0.4s;
+    }
+
+    #rzp-button1:hover {
+        background-color: #FF874F; 
+    }
+</style>
+</head>
+<body>
+<!-- Header -->
+{% include 'header.html' %}  
+
+<!-- Main content -->
+<div class="container mt-5" style="margin-left: 220px;">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2 class="text-center mb-4">Support Our vision</h2>
+            <p class="lead">Your contribution will help us to make our app and service better</p>
+            <div class="card p-4">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount (INR)</label>
+                        <select class="form-select" id="amount">
+                            <option value="50">50</option>
+                            <!-- <option value="100">100</option>
+                            <option value="200">200</option> -->
+                        </select>
+                    </div>
+                    <button type="button" id="rzp-button1" class="btn btn-primary btn-lg btn-block">Pay with Razorpay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Razorpay script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var selectedAmount = document.getElementById('amount').value;  // Get the initially selected amount
+
+var options = {
+    "key": "rzp_test_Wvov0HjeptFqcA", 
+    "amount": selectedAmount * 100,  // Convert amount to paise
+    "currency": "INR",
+    "name": "Fund Raising",
+    "description": "Support Us By Donating Small amount",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{data.id}}", 
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature)
+    },
+    "prefill": {
+        "name": "Shubham Bhosale",
+        "email": "shubham.bhosle@gmail.com",
+        "contact": "8850452049"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office Panvel"
+    },
+    "theme": {
+        "color": "green"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+
+<!-- Bootstrap 5 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shC1FdTPbKJ0QvzC2G5VX5FnVHfRSJoXJKS4L" crossorigin="anonymous"></script>
+
+<!-- Footer -->
+{% include 'footer.html' %} 
+
+</body>
+</html>
