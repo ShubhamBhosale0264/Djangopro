@@ -25,18 +25,18 @@
                         <div class="row" id="genre-cards">
                             {% for genre in genres %}
                             <div class="col-md-4" style="padding: 20px">
-                                <div class="card h-100 genre-card" data-genre-id="{{ genre.id }}">
+                                <div class="card h-100 genre-card" style = "background-color:transparent"data-genre-id="{{ genre.id }}">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ genre.name }}</h5>
+                                        <h5 class="card-title"style = color:white>{{ genre.name }}</h5>
                                         <div class="song-list">
                                             <h6 class="card-subtitle mb-2 text-muted">Songs:</h6>
                                             {% for song in genre.song_set.all %}
-                                                <div class="song">
+                                                <div class="song"style = color:white>
                                                     <p><b>{{ song.song_title }}</b></p>
                                                     <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
                                                     <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
                                                     {% if user.is_authenticated %}
-                                                        <a href="/add_to_playlist/{{ song.id }}"><button class="btn btn-info" style="margin-top: 10px;">Add to Playlist</button></a>
+                                                        <a href="/add_to_playlist/{{ song.id }}"><button class="btn btn-info">Add to Playlist</button></a>
                                                     {% endif %}
                                                 </div>
                                             {% endfor %}

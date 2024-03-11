@@ -23,20 +23,22 @@
                             {% for user_playlist in user.user_playlist_set.all %}
                                 {% with song=user_playlist.songs %}
                                     <div class="col-md-4" style="padding: 20px">
-                                        <div class="card h-100">
+                                        <div class="card h-100" style="background-color: transparent;">
                                             <img src="{{ song.pimage.url }}" class="card-img-top" alt="...">
                                             <div class="play">
                                                 <span class="fa fa-play"></span>
                                             </div>
                                             <div class="card-body" >
-                                                <h5 class="card-title">{{ song.song_title }}</h5>
-                                                <p class="card-text">{{ song.artist_name }}</p>
-                                                <p class="card-text">{{ song.album_name }}</p>
+                                                <h5 class="card-title"style ="color:white">{{ song.song_title }}</h5>
+                                                <p class="card-text"style ="color:white">{{ song.artist_name }}</p>
+                                                <p class="card-text"style ="color:white">{{ song.album_name }}</p>
                                                 <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
                                                 <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
                                                 <input type="range" class="seek-bar" min="0" max="100" value="0">
                                                 <span class="start-time"></span><span class="end-time"></span>
-                                                <button class="btn btn-danger remove-from-playlist-btn" style="margin-top: 10px;">Remove from Playlist</button>
+                                                <form action="{% url 'remove_from_playlist' song.id %}" method="GET">
+                                                    <button type="submit" class="btn btn-danger remove-from-playlist-btn" style="margin-top: 10px;">Remove from Playlist</button>
+                                                </form>                                            
                                             </div>
                                         </div>
                                     </div>

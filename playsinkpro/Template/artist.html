@@ -25,18 +25,18 @@
                         <div class="row" id="artist-cards">
                             {% for artist in artists %}
                                 <div class="col-md-4" style="padding: 20px">
-                                    <div class="card h-100 artist-card" data-artist-id="{{ artist.id }}">
+                                    <div class="card h-100 artist-card" style="color: white; background-color: transparent;" data-artist-id="{{ artist.id }}">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ artist.artist_name }}</h5>
+                                            <h5 class="card-title"style = "color:white">{{ artist.artist_name }}</h5>
                                             <div class="song-list">
-                                                <h6 class="card-subtitle mb-2 text-muted"><b>Songs:</b></h6>
+                                                <h6 class="card-subtitle mb-2 text-muted" style="color: white;"><b>Songs:</b></h6>
                                                 {% for song in artist.song_set.all %}
                                                     <div class="song">
                                                         <p><b>{{ song.song_title }}</b></p>
                                                         <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
                                                         <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
                                                         {% if user.is_authenticated %}
-                                                            <a href="/add_to_playlist/{{ song.id }}"><button class="btn btn-info" style="margin-top: 10px;">Add to Playlist</button></a>
+                                                            <a href="/add_to_playlist/{{ song.id }}"><button class="btn btn-info">Add to Playlist</button></a>
                                                         {% endif %}
                                                     </div>
                                                 {% endfor %}

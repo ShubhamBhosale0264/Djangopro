@@ -16,15 +16,16 @@
             width: 250px;
             background-image: url('{% static "sidebar.png" %}');
             text-align: center;
-            color: black;
+            color: white
         }
         .filter-link{
-            color: black;
+            font-family: 'Times New Roman';
+            color: white;
             margin-bottom: 20px;
             text-decoration: none;
         }
         .logo-text {
-        color: black;
+        color: white;
         text-decoration-line:underline; 
         text-decoration-color: black;
         font-family: 'Courier New', Courier, monospace;
@@ -52,16 +53,23 @@
                 <li class="divider">|</li>
                 {% if user.is_authenticated %}
                 <li><a href="/about">About</a></li>
+                <li class="divider">|</li>
                 <li><a href="/playlist"><span>MyPlaylist</span></a></li>
+                <li class="divider">|</li>
                 <li><a href="/artist"><span class="fa fa-search"></span><span>Artist</span></a></li>
+                <li class="divider">|</li>
                 <li><a href="/genre"><span class="fa fa-search"></span><span>Genre</span></a></li>
+                <li class="divider">|</li>
                 <li><a href="/logout">Logout</a></li>
                 {% else %}
                 <li><a href="/login">Log In</a></li>
                 {% endif %}
+                <li class="divider">|</li>  
                 <li>
                     <a href="/search_song">Search</a>
                 </li>
+                <li class="divider">|</li>
+
             </ul>
             
         </div>
@@ -77,7 +85,7 @@
                     <h2 class="logo-text;">Playsink</h2>
                 </div>
                 <div class="filter-section mt-3"style=>
-                    <h5 class="filter-header" style="margin-left: 20px;">Legal & Privacy</h5>
+                    <h5 class="filter-header" style="margin-left: 20px;color: aliceblue;">Legal & Privacy</h5>
                     <ul class="list-unstyled" style="margin-left: 20px;">
                         <li><a href="/cooki" class="filter" style="text-decoration: none; color: white;">Cookies Policy</a></li>
                         <li><a href="/legal" class="filter" style="text-decoration: none; color: white;">Legal Notices</a></li>

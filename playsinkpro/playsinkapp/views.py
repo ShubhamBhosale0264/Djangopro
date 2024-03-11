@@ -98,7 +98,7 @@ def add_to_playlist(request, song_id):
     else:
         return redirect('/login')
 def remove_from_playlist(request, song_id):
-    if request.method == 'GET':
+    if request.method == 'GET' and request.user.is_authenticated:
         user = request.user
         try:
             playlist_song = User_Playlist.objects.get(user=user, songs_id=song_id)
@@ -120,11 +120,11 @@ def search_song(request):
     else:
         return render(request, 'search_results.html', {'error_message': 'Invalid request method.'})
 
-# def create_playlist(request):
-#     if request.method == 'POST':
-#         playlist_name = request.POST.get('playlist_name')
-#         if playlist_name:
-#             user = request.user
-#             playlist = User_Playlist.objects.create(user=user, name=playlist_name)
-#             return redirect('/home')  
-#     return render(request, 'create_playlist.html')
+def create_playlist(request):
+    if request.method == 'POST':
+        playlist_name = request.POST.get('playlist_name')
+        if playlist_name:
+            user = request.user
+            playlist = User_Playlist.objects.create(user=user, name=playlist_name)
+            return redirect('/home')  
+    return render(request, 'create_playlist.html')

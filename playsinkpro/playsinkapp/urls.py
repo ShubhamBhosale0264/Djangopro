@@ -18,11 +18,12 @@ urlpatterns = [
     path('genre',views.genre_songs),
     path('about',views.about),
     path('add_to_playlist/<int:song_id>/', views.add_to_playlist, name='add_to_playlist'),
+    path('remove_from_playlist/<int:song_id>/', views.remove_from_playlist, name='remove_from_playlist'),  # Add this line
     path('cookies',views.cooki),
     path('legal',views.lgl),
     path('privacy',views.privacy),
     path('search_song', views.search_song),
-    # path('create_playlist/', views.create_playlist, name='create_playlist'),
+    path('create_playlist/', views.create_playlist, name='create_playlist'),
 
 
 

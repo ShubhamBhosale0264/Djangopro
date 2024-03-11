@@ -20,15 +20,15 @@
                         <div class="row">
                             {% for song in songs %}
                                 <div class="col-md-4" style="padding: 20px">
-                                    <div class="card h-100">
+                                    <div class="card h-100" style="background-color: transparent;">
                                         <img src="{{song.pimage.url}}" class="card-img-top"  alt="...">
                                         <div class="play">
                                             <span class="fa fa-play"></span>
                                         </div>
                                         <div class="card-body" >
-                                            <h5 class="card-title"><b>{{ song.song_title }}</b></h5>
-                                            <p class="card-text"><b>{{ song.artist_name }}</b></p>
-                                            <p class="card-text"><b>{{ song.album_name }}</b></p>   
+                                            <h5 class="card-title"style="color:white"><b>{{ song.song_title }}</b></h5>
+                                            <p class="card-text"style="color:white"><b>{{ song.artist_name }}</b></p>
+                                            <p class="card-text"style="color:white"><b>{{ song.album_name }}</b></p>   
                                             <button class="btn btn-primary play-btn" data-song-url="{{song.song_file.url}}">Play</button>
                                             <button class="btn btn-primary pause-btn" data-song-url="{{song.song_file.url}}">Pause</button>
                                             <input type="range" class="seek-bar" min="0" max="100" value="0">
