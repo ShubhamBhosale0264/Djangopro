@@ -4,6 +4,7 @@
   }
   body {
     /* background-image: url(/playsinkpro/static/playsinkpro.jpg);   */
+    font-family:"Times New Roman";
     background-size: contain;
     image-resolution:  2dppx;
 
