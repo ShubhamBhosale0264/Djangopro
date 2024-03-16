@@ -135,7 +135,7 @@ def donate(request):
     data = {
         "amount": amount * 100,  
         "currency": "INR",
-        "receipt": "Donation", 
+        "receipt": "Contribution", 
         "payment_capture": 1
     }
     payment = client.order.create(data=data)
