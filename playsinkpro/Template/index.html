@@ -29,6 +29,11 @@
                                             <h5 class="card-title"style="color:white"><b>{{ song.song_title }}</b></h5>
                                             <p class="card-text"style="color:white"><b>{{ song.artist_name }}</b></p>
                                             <p class="card-text"style="color:white"><b>{{ song.album_name }}</b></p>   
+                                            <label for="volume-control" style="color:white;" style="margin: 10px;">Volume:</label>
+                                            <input type="range" class="volume-bar" id="volume-control-{{ song.id }}" min="0" max="100" value="100"><br>
+                                            <label for="speed-control" style="color:white;"style = "margin-bottom:10px">Speed:</label>
+                                            <input type="range" class="speed-bar" id="speed-control-{{ song.id }}" min="0.5" max="2.0" step="0.1" value="1.0">
+                                            <span class="speed-value" id="speed-value-{{ song.id }}" style="color:white; margin-left: 10px;">1.0x</span><br> <!-- Added unique IDs for speed value -->
                                             <button class="btn btn-primary play-btn" data-song-url="{{song.song_file.url}}">Play</button>
                                             <button class="btn btn-primary pause-btn" data-song-url="{{song.song_file.url}}">Pause</button>
                                             <input type="range" class="seek-bar" min="0" max="100" value="0">
@@ -53,8 +58,11 @@
         $(document).ready(function() {
             var currentAudio = null;
             var seekBar = null;
+            var volumeBar = null;
+            var speedBar = null;
             var startTime = null;
             var endTime = null;
+            var currentSpeedValue = null; // Store reference to current speed value element
     
             $('.play-btn').click(function() {
                 var songUrl = $(this).data('song-url');
@@ -65,8 +73,11 @@
                 currentAudio.play();
     
                 seekBar = $(this).closest('.card-body').find('.seek-bar');
+                volumeBar = $(this).closest('.card-body').find('.volume-bar');
+                speedBar = $(this).closest('.card-body').find('.speed-bar');
                 startTime = $(this).closest('.card-body').find('.start-time');
                 endTime = $(this).closest('.card-body').find('.end-time');
+                currentSpeedValue = $(this).closest('.card-body').find('.speed-value'); // Update current speed value reference
     
                 currentAudio.addEventListener('timeupdate', function() {
                     var position = currentAudio.currentTime / currentAudio.duration;
@@ -78,6 +89,15 @@
                     var seekTime = currentAudio.duration * (this.value / 100);
                     currentAudio.currentTime = seekTime;
                     updateTimes();
+                });
+    
+                volumeBar.on('input', function() {
+                    currentAudio.volume = this.value / 100;
+                });
+    
+                speedBar.on('input', function() {
+                    currentAudio.playbackRate = parseFloat(this.value);
+                    currentSpeedValue.text(this.value + 'x'); // Update speed value text for current song
                 });
             });
     

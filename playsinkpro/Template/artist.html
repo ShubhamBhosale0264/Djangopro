@@ -35,6 +35,12 @@
                                                         <p><b>{{ song.song_title }}</b></p>
                                                         <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
                                                         <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
+                                                        <br>
+                                                        <label for="volume-control" style="color: white;">Volume:</label>
+                                                        <input type="range" class="volume-bar" min="0" max="100" value="100">
+                                                        <br>
+                                                        <label for="speed-control" style="color: white;">Speed:</label>
+                                                        <input type="range" class="speed-bar" min="0.5" max="2.0" step="0.1" value="1.0">
                                                         {% if user.is_authenticated %}
                                                             <a href="/add_to_playlist/{{ song.id }}"><button class="btn btn-info">Add to Playlist</button></a>
                                                         {% endif %}
@@ -81,6 +87,18 @@
                 e.stopPropagation();
                 if (currentAudio) {
                     currentAudio.pause();
+                }
+            });
+
+            $('.volume-bar').on('input', function() {
+                if (currentAudio) {
+                    currentAudio.volume = this.value / 100;
+                }
+            });
+
+            $('.speed-bar').on('input', function() {
+                if (currentAudio) {
+                    currentAudio.playbackRate = parseFloat(this.value);
                 }
             });
         }); 
