@@ -59,58 +59,86 @@
     {% include "footer.html" %}
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.genre-card').click(function() {
-                // Toggle the display of the song list for the clicked card
-                $(this).find('.song-list').slideToggle();
-                // Collapse song lists of other cards
-                $('.genre-card').not(this).find('.song-list').slideUp();
-    
-                // Enable the clicked card and disable others
-                $('.genre-card').removeClass('active');
-                $(this).addClass('active');
-                $('.genre-card').not('.active').removeClass('disabled');
-            });
-    
-            var currentAudio = null;
-    
-            $('.play-btn').click(function(e) {
-                // Prevent the click event from bubbling up to the genre card
-                e.stopPropagation();
-    
-                // If another song is currently playing, stop it
-                if (currentAudio && !currentAudio.paused) {
-                    currentAudio.pause();
-                }
-    
-                var songUrl = $(this).data('song-url');
-                currentAudio = new Audio(songUrl);
-                currentAudio.play();
-            });
-    
-            $('.pause-btn').click(function(e) {
-                // Prevent the click event from bubbling up to the genre card
-                e.stopPropagation();
-    
-                // Pause the current song
-                if (currentAudio) {
-                    currentAudio.pause();
-                }
-            });
+<script>
+    $(document).ready(function() {
+        $('.genre-card').click(function() {
+            // Toggle the display of the song list for the clicked card
+            $(this).find('.song-list').slideToggle();
+            $('.genre-card').not(this).find('.song-list').slideUp();
 
-            $('.volume-bar').on('input', function() {
-                if (currentAudio) {
-                    currentAudio.volume = this.value / 100;
-                }
-            });
+            $('.genre-card').removeClass('active');
+            $(this).addClass('active');
+            $('.genre-card').not('.active').removeClass('disabled');
+        });
 
-            $('.speed-bar').on('input', function() {
-                if (currentAudio) {
-                    currentAudio.playbackRate = parseFloat(this.value);
+        var currentAudio = null;
+
+        $('.play-btn').click(function(e) {
+            e.stopPropagation();
+
+            if (currentAudio && !currentAudio.paused) {
+                currentAudio.pause();
+            }
+
+            var songUrl = $(this).data('song-url');
+            currentAudio = new Audio(songUrl);
+            currentAudio.play();
+        });
+
+        $('.pause-btn').click(function(e) {
+            e.stopPropagation();
+
+            if (currentAudio) {
+                currentAudio.pause();
+            }
+        });
+
+        $('.volume-bar').on('input', function() {
+            if (currentAudio) {
+                currentAudio.volume = this.value / 100;
+                // Update the mute status based on the volume value
+                if (this.value == 0) {
+                    currentAudio.muted = true;
+                } else {
+                    currentAudio.muted = false;
                 }
-            });
-        }); 
-    </script>
+            }
+        });
+
+        $('.speed-bar').on('input', function() {
+            if (currentAudio) {
+                currentAudio.playbackRate = parseFloat(this.value);
+            }
+        });
+
+        $(document).keydown(function(e) {
+            if (e.key === " ") { 
+                e.preventDefault(); 
+                if (currentAudio) {
+                    if (currentAudio.paused) {
+                        currentAudio.play();
+                    } else {
+                        currentAudio.pause();
+                    }
+                }
+            } else if (e.key === "m" || e.key === "M") { 
+                e.preventDefault(); 
+                if (currentAudio) {
+                    if (currentAudio.muted) {
+                        currentAudio.muted = false;
+                        // Restore previous volume if it was muted
+                        if ($('.volume-bar').val() == 0) {
+                            currentAudio.volume = 0.5; // Default volume
+                            $('.volume-bar').val(50); // Default volume bar value
+                        }
+                    } else {
+                        currentAudio.muted = true;
+                        $('.volume-bar').val(0); // Mute volume bar
+                    }
+                }
+            }
+        });
+    }); 
+</script>
 </body>
 </html>

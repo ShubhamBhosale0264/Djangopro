@@ -27,25 +27,18 @@
         }
         .card {
             background-color:black;
-      
         }
         .card-body {
-            /* padding: 20px; */
             background-color: black;
             color: white;
-
         }
         .card-title {
             margin-top: 0;
-            color: white;
             font-size: 18px;
             font-weight: bold;
-            color: #333;
         }
         .card-text {
-            color: white;
             margin-bottom: 10px;
-            color: #666;
         }
         .btn {
             cursor: pointer;
@@ -76,7 +69,7 @@
 
     {% include "header.html" %}
 
-    <div class="container" style="margin-left: 250px;" style="color:white">
+    <div class="container" style="margin-left: 250px;">
         <h1>Search Songs</h1>
 
         <form action="/search_song" method="GET">
@@ -89,14 +82,16 @@
         {% elif searched_songs %}
             <div class="card-container">
                 {% for song in searched_songs %}
-                    <div class="card" style = "border:none">
+                    <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title" style="color: white">{{ song.song_title }}</h5>
-                            <p class="card-text" style="color: white">{{ song.artist_name }}</p>
-                            <p class="card-text" style="color: white">{{ song.album_name }}</p>
+                            <h5 class="card-title">{{ song.song_title }}</h5>
+                            <p class="card-text">{{ song.artist_name }}</p>
+                            <p class="card-text">{{ song.album_name }}</p>
 
-                            <button class="btn btn-primary play-btn" data-song-url="{{song.song_file.url}}">Play</button>
-                            <button class="btn btn-primary pause-btn" data-song-url="{{song.song_file.url}}">Pause</button>
+                            <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
+                            <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
+                            <!-- Mute/Unmute button -->
+                            <!--<button class="btn btn-primary mute-btn">Mute</button>-->
                             <input type="range" class="seek-bar" min="0" max="100" value="0">
                             {% if user.is_authenticated %}
                                 <a href="/add_to_playlist/{{ song.id }}" class="btn btn-info" style="margin-top: 10px;">Add to Playlist</a>
@@ -117,10 +112,11 @@
         $(document).ready(function() {
             var currentAudio = null;
             var seekBar = null;
-            var startTime = null;
-            var endTime = null;
+            var startTime = $('.start-time');
+            var endTime = $('.end-time');
             var pausedTime = 0;
 
+            // Click event for play button
             $('.play-btn').click(function() {
                 var songUrl = $(this).data('song-url');
                 if (currentAudio && !currentAudio.paused) {
@@ -131,29 +127,51 @@
                 currentAudio = new Audio(songUrl);
                 currentAudio.currentTime = pausedTime;
                 currentAudio.play();
-
+    
                 seekBar = $(this).closest('.card-body').find('.seek-bar');
-                startTime = $(this).closest('.card-body').find('.start-time');
-                endTime = $(this).closest('.card-body').find('.end-time');
-
+    
                 currentAudio.addEventListener('timeupdate', function() {
                     var position = currentAudio.currentTime / currentAudio.duration;
                     seekBar.val(position * 100);
                     updateTimes();
                 });
-
+    
                 seekBar.on('input', function() {
                     var seekTime = currentAudio.duration * (this.value / 100);
                     currentAudio.currentTime = seekTime;
                     updateTimes();
                 });
             });
-
+    
+            // Click event for pause button
             $('.pause-btn').click(function() {
                 if (currentAudio) {
                     pausedTime = currentAudio.currentTime;
                     currentAudio.pause();
                     seekBar.off('input');
+                }
+            });
+
+            // Handle keyboard events
+            $(document).keydown(function(e) {
+                if (e.key === " ") { // spacebar
+                    e.preventDefault(); 
+                    if (currentAudio) {
+                        if (currentAudio.paused) {
+                            currentAudio.play();
+                        } else {
+                            currentAudio.pause();
+                        }
+                    }
+                } else if (e.key === "m" || e.key === "M") { // M key
+                    e.preventDefault(); 
+                    if (currentAudio) {
+                        if (currentAudio.muted) {
+                            currentAudio.muted = false;
+                        } else {
+                            currentAudio.muted = true;
+                        }
+                    }
                 }
             });
 

@@ -46,4 +46,3 @@ class User_Playlist(models.Model):
     songs = models.ForeignKey(Song,verbose_name = "songs_name", on_delete=models.CASCADE,blank = True)
 def __str__(self):
     return f"{self.user.username}'s Playlist: {self.songs.song_title}"
-

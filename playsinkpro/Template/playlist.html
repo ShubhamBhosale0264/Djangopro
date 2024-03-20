@@ -69,58 +69,95 @@
             var speedBar = null;
             var startTime = null;
             var endTime = null;
-            var pausedTime = 0;
-
+            var currentSpeedValue = null; // Store reference to current speed value element
+    
             $('.play-btn').click(function() {
                 var songUrl = $(this).data('song-url');
                 if (currentAudio && !currentAudio.paused) {
-                    pausedTime = currentAudio.currentTime;
                     currentAudio.pause();
-                    seekBar.off('input');
                 }
                 currentAudio = new Audio(songUrl);
-                currentAudio.currentTime = pausedTime;
                 currentAudio.play();
-
+    
                 seekBar = $(this).closest('.card-body').find('.seek-bar');
                 volumeBar = $(this).closest('.card-body').find('.volume-bar');
                 speedBar = $(this).closest('.card-body').find('.speed-bar');
                 startTime = $(this).closest('.card-body').find('.start-time');
                 endTime = $(this).closest('.card-body').find('.end-time');
-
+                currentSpeedValue = $(this).closest('.card-body').find('.speed-value'); // Update current speed value reference
+    
                 currentAudio.addEventListener('timeupdate', function() {
                     var position = currentAudio.currentTime / currentAudio.duration;
                     seekBar.val(position * 100);
                     updateTimes();
                 });
-
+    
+                currentAudio.addEventListener('ended', function() {
+                    var nextSong = $(this).closest('.card-body').next().find('.play-btn');
+                    if (nextSong.length !== 0) {
+                        nextSong.trigger('click');
+                    }
+                });
+    
                 seekBar.on('input', function() {
                     var seekTime = currentAudio.duration * (this.value / 100);
                     currentAudio.currentTime = seekTime;
                     updateTimes();
                 });
-
+    
                 volumeBar.on('input', function() {
                     currentAudio.volume = this.value / 100;
                 });
-
+    
                 speedBar.on('input', function() {
                     currentAudio.playbackRate = parseFloat(this.value);
+                    currentSpeedValue.text(this.value + 'x'); // Update speed value text for current song
                 });
             });
-            
+    
             $('.pause-btn').click(function() {
-                if (currentAudio) {
-                    pausedTime = currentAudio.currentTime;
+                if (currentAudio && !currentAudio.paused) {
                     currentAudio.pause();
-                    seekBar.off('input');
                 }
             });
-
-            $('.remove-from-playlist-btn').click(function() {
-                $(this).closest('.col-md-4').remove();
+    
+            $(document).keydown(function(e) {
+                if (e.key === " ") { // Spacebar
+                    e.preventDefault(); // Prevent default behavior (scrolling)
+                    if (currentAudio) {
+                        if (currentAudio.paused) {
+                            currentAudio.play();
+                        } else {
+                            currentAudio.pause();
+                        }
+                    }
+                } else if (e.key === "ArrowLeft") { // Left arrow for previous song
+                    var prevSong = $('.play-btn:focus').closest('.card-body').prev().find('.play-btn');
+                    if (prevSong.length !== 0) {
+                        prevSong.trigger('click');
+                    }
+                } else if (e.key === "ArrowRight") { // Right arrow for next song
+                    var nextSong = $('.play-btn:focus').closest('.card-body').next().find('.play-btn');
+                    if (nextSong.length !== 0) {
+                        nextSong.trigger('click');
+                    }
+                }
             });
-
+    
+            $('.volume-up-btn').click(function() {
+                if (currentAudio && currentAudio.volume < 1) {
+                    currentAudio.volume += 0.1;
+                    volumeBar.val(currentAudio.volume * 100);
+                }
+            });
+    
+            $('.volume-down-btn').click(function() {
+                if (currentAudio && currentAudio.volume > 0) {
+                    currentAudio.volume -= 0.1;
+                    volumeBar.val(currentAudio.volume * 100);
+                }
+            });
+    
             function updateTimes() {
                 var currentMinutes = Math.floor(currentAudio.currentTime / 60);
                 var currentSeconds = Math.floor(currentAudio.currentTime % 60);
@@ -131,5 +168,6 @@
             }
         });
     </script>
+    
 </body>
 </html>
