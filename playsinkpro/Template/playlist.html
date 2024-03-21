@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="{% static "index.css" %}">
-    <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
 </head>
 <body style="background-color:#0c0d0f">
-    {% include "header.html" %}
-    
-    <div class="container-fluid" style="background-image: url('{% static "playsinkpro.jpg" %}'); margin-top: -60px;">
+    {% include 'header.html' %}
+    <div class="container-fluid" style="background-image: url('{% static 'playsinkpro.jpg' %}'); margin-top: -60px;">
         <div class="row justify-content-center">
             <div class="col-md-10 shadow mt-1">
                 <div class="playlist mt-5">
@@ -57,6 +56,7 @@
             </div>
         </div>
     </div>
+    {% include 'footer.html' %}
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -161,7 +161,7 @@
                 var currentSeconds = Math.floor(currentAudio.currentTime % 60);
                 var durationMinutes = Math.floor(currentAudio.duration / 60);
                 var durationSeconds = Math.floor(currentAudio.duration % 60);
-                startTime.text(currentMinutes + ':' + (currentSeconds < 10 ? '0' : '') + currentSeconds);
+                startTime.text(currentMinutes + ':' + (currentSeconds< 10 ? '0' : '') + currentSeconds);
                 endTime.text(durationMinutes + ':' + (durationSeconds < 10 ? '0' : '') + durationSeconds);
             }
         });
