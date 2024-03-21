@@ -84,9 +84,9 @@
                 {% for song in searched_songs %}
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ song.song_title }}</h5>
-                            <p class="card-text">{{ song.artist_name }}</p>
-                            <p class="card-text">{{ song.album_name }}</p>
+                            <h5 class="card-title"style= "color:white">{{ song.song_title }}</h5>
+                            <p class="card-text"style= "color:white">{{ song.artist_name }}</p>
+                            <p class="card-text"style= "color:white">{{ song.album_name }}</p>
 
                             <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
                             <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
@@ -116,7 +116,6 @@
             var endTime = $('.end-time');
             var pausedTime = 0;
 
-            // Click event for play button
             $('.play-btn').click(function() {
                 var songUrl = $(this).data('song-url');
                 if (currentAudio && !currentAudio.paused) {
@@ -143,7 +142,6 @@
                 });
             });
     
-            // Click event for pause button
             $('.pause-btn').click(function() {
                 if (currentAudio) {
                     pausedTime = currentAudio.currentTime;
@@ -152,9 +150,9 @@
                 }
             });
 
-            // Handle keyboard events
+
             $(document).keydown(function(e) {
-                if (e.key === " ") { // spacebar
+                if (e.key === " ") { 
                     e.preventDefault(); 
                     if (currentAudio) {
                         if (currentAudio.paused) {
@@ -163,7 +161,7 @@
                             currentAudio.pause();
                         }
                     }
-                } else if (e.key === "m" || e.key === "M") { // M key
+                } else if (e.key === "m" || e.key === "M") {
                     e.preventDefault(); 
                     if (currentAudio) {
                         if (currentAudio.muted) {
