@@ -98,16 +98,13 @@ def add_to_playlist(request, song_id):
         return render(request, 'playlist.html', {'msg': msg})
     else:
         return redirect('/login')
-def remove_from_playlist(request, song_id):
+def remove_from_playlist(request, playlist_id):
     if request.method == 'GET' and request.user.is_authenticated:
         user = request.user
-        try:
-            playlist_song = User_Playlist.objects.get(user=user, songs_id=song_id)
-            playlist_song.delete()
-            msg = "Song removed from your playlist successfully."
-        except User_Playlist.DoesNotExist:
-            msg = "Song does not exist in your playlist."
-        return redirect('/playlist', {'msg': msg})
+        playlist_song = get_object_or_404(User_Playlist, id=playlist_id, user=user)
+        playlist_song.delete()  
+        msg = "Song removed from your playlist successfully."
+        return redirect('/playlist?msg=' + msg)
     else:
         return redirect('/login')
 def search_song(request):
