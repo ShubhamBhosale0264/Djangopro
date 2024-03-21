@@ -42,7 +42,6 @@ class Song(models.Model):
 
 class User_Playlist(models.Model):
     user = models.ForeignKey(User,verbose_name = "user_name" ,on_delete=models.CASCADE)
-    name = models.CharField(max_length=100) 
     songs = models.ForeignKey(Song,verbose_name = "songs_name", on_delete=models.CASCADE,blank = True)
 def __str__(self):
     return f"{self.user.username}'s Playlist: {self.songs.song_title}"

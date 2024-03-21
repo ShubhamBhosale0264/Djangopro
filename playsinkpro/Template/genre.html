@@ -62,7 +62,6 @@
 <script>
     $(document).ready(function() {
         $('.genre-card').click(function() {
-            // Toggle the display of the song list for the clicked card
             $(this).find('.song-list').slideToggle();
             $('.genre-card').not(this).find('.song-list').slideUp();
 
@@ -96,7 +95,6 @@
         $('.volume-bar').on('input', function() {
             if (currentAudio) {
                 currentAudio.volume = this.value / 100;
-                // Update the mute status based on the volume value
                 if (this.value == 0) {
                     currentAudio.muted = true;
                 } else {
@@ -126,14 +124,13 @@
                 if (currentAudio) {
                     if (currentAudio.muted) {
                         currentAudio.muted = false;
-                        // Restore previous volume if it was muted
                         if ($('.volume-bar').val() == 0) {
-                            currentAudio.volume = 0.5; // Default volume
-                            $('.volume-bar').val(50); // Default volume bar value
+                            currentAudio.volume = 0.5; 
+                            $('.volume-bar').val(50); 
                         }
                     } else {
                         currentAudio.muted = true;
-                        $('.volume-bar').val(0); // Mute volume bar
+                        $('.volume-bar').val(0); 
                     }
                 }
             }

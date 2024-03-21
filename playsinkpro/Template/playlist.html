@@ -17,11 +17,9 @@
                 <div class="playlist mt-5">
                     <div class="container" style="margin-left:130px" >
                         <h1 class="text-left text-white">{{ user.username }}'s Playlist</h1>
-                        <!-- Button to create a new playlist -->
-                        <!-- <a href="{% url 'create_playlist' %}" class="btn btn-success">Create Playlist</a> -->
                         <div class="row">
-                            {% for User_Playlist in user.User_Playlist_set.all %}
-                                {% with song=User_Playlist.songs %}
+                            {% for user_playlist in user.user_playlist_set.all %}
+                                {% with song=user_playlist.songs %}
                                     <div class="col-md-4" style="padding: 20px">
                                         <div class="card h-100" style="background-color: transparent;">
                                             <img src="{{ song.pimage.url }}" class="card-img-top" alt="...">
@@ -29,9 +27,9 @@
                                                 <span class="fa fa-play"></span>
                                             </div>
                                             <div class="card-body" >
-                                                <h5 class="card-title"style ="color:white">{{ song.song_title }}</h5>
-                                                <p class="card-text"style ="color:white">{{ song.artist_name }}</p>
-                                                <p class="card-text"style ="color:white">{{ song.album_name }}</p>
+                                                <h5 class="card-title" style="color:white">{{ song.song_title }}</h5>
+                                                <p class="card-text" style="color:white">{{ song.artist_name }}</p>
+                                                <p class="card-text" style="color:white">{{ song.album_name }}</p>
                                                 <button class="btn btn-primary play-btn" data-song-url="{{ song.song_file.url }}">Play</button>
                                                 <button class="btn btn-primary pause-btn" data-song-url="{{ song.song_file.url }}">Pause</button>
                                                 <input type="range" class="seek-bar" min="0" max="100" value="0">
@@ -43,10 +41,11 @@
                                                 <div>
                                                     <label for="speed-control" style="color:white;">Speed:</label>
                                                     <input type="range" class="speed-bar" id="speed-control" min="0.5" max="2.0" step="0.1" value="1.0">
-                                                <form action="{% url 'remove_from_playlist' song.id %}" method="GET">
+                                                    <span class="speed-value">1.0x</span> 
+                                                </div>
+                                                <form action="{% url 'remove_from_playlist' user_playlist.id %}" method="GET">
                                                     <button type="submit" class="btn btn-danger remove-from-playlist-btn" style="margin-top: 10px;">Remove from Playlist</button>
                                                 </form>                                            
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -59,7 +58,6 @@
         </div>
     </div>
 
-    <!-- {% include "footer.html" %} -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -69,7 +67,7 @@
             var speedBar = null;
             var startTime = null;
             var endTime = null;
-            var currentSpeedValue = null; // Store reference to current speed value element
+            var currentSpeedValue = null;
     
             $('.play-btn').click(function() {
                 var songUrl = $(this).data('song-url');
@@ -84,7 +82,7 @@
                 speedBar = $(this).closest('.card-body').find('.speed-bar');
                 startTime = $(this).closest('.card-body').find('.start-time');
                 endTime = $(this).closest('.card-body').find('.end-time');
-                currentSpeedValue = $(this).closest('.card-body').find('.speed-value'); // Update current speed value reference
+                currentSpeedValue = $(this).closest('.card-body').find('.speed-value');
     
                 currentAudio.addEventListener('timeupdate', function() {
                     var position = currentAudio.currentTime / currentAudio.duration;
@@ -111,7 +109,7 @@
     
                 speedBar.on('input', function() {
                     currentAudio.playbackRate = parseFloat(this.value);
-                    currentSpeedValue.text(this.value + 'x'); // Update speed value text for current song
+                    currentSpeedValue.text(this.value + 'x'); 
                 });
             });
     
@@ -122,8 +120,8 @@
             });
     
             $(document).keydown(function(e) {
-                if (e.key === " ") { // Spacebar
-                    e.preventDefault(); // Prevent default behavior (scrolling)
+                if (e.key === " ") { 
+                    e.preventDefault();
                     if (currentAudio) {
                         if (currentAudio.paused) {
                             currentAudio.play();
@@ -131,12 +129,12 @@
                             currentAudio.pause();
                         }
                     }
-                } else if (e.key === "ArrowLeft") { // Left arrow for previous song
+                } else if (e.key === "ArrowLeft") { 
                     var prevSong = $('.play-btn:focus').closest('.card-body').prev().find('.play-btn');
                     if (prevSong.length !== 0) {
                         prevSong.trigger('click');
                     }
-                } else if (e.key === "ArrowRight") { // Right arrow for next song
+                } else if (e.key === "ArrowRight") { 
                     var nextSong = $('.play-btn:focus').closest('.card-body').next().find('.play-btn');
                     if (nextSong.length !== 0) {
                         nextSong.trigger('click');

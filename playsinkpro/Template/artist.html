@@ -64,16 +64,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Click event for artist cards
         $('.artist-card').click(function() {
             var songList = $(this).find('.song-list');
             songList.slideToggle();
             $('.song-list').not(songList).slideUp();
         });
-
-        // Click event for genre cards
         $('.genre-card').click(function() {
-            // Toggle the display of the song list for the clicked card
             $(this).find('.song-list').slideToggle();
             $('.genre-card').not(this).find('.song-list').slideUp();
 
@@ -84,8 +80,6 @@
 
         var currentAudio = null;
         var currentVolumeBar = null;
-
-        // Click event for play button
         $('.play-btn').click(function(e) {
             e.stopPropagation();
             
@@ -96,34 +90,23 @@
             var songUrl = $(this).data('song-url');
             currentAudio = new Audio(songUrl);
             currentAudio.play();
-            
-            // Get the volume bar associated with the current song
             currentVolumeBar = $(this).closest('.artist-card').find('.volume-bar');
         });
-
-        // Click event for pause button
         $('.pause-btn').click(function(e) {
             e.stopPropagation();
             if (currentAudio) {
                 currentAudio.pause();
             }
-        });
-
-        // Input event for speed bar
         $('.speed-bar').on('input', function() {
             if (currentAudio) {
                 currentAudio.playbackRate = parseFloat(this.value);
             }
         });
-
-        // Input event for volume bar
         $('.volume-bar').on('input', function() {
             if (currentAudio) {
                 currentAudio.volume = this.value / 100;
             }
         });
-
-        // Keydown event for keyboard controls
         $(document).keydown(function(e) {
             if (e.key === " ") { 
                 e.preventDefault(); 
@@ -139,16 +122,13 @@
                 if (currentAudio) {
                     if (currentAudio.muted) {
                         currentAudio.muted = false;
-                        // Restore previous volume if it was muted
                         if (currentAudio.volume == 0) {
-                            currentAudio.volume = 0.5; // Default volume
+                            currentAudio.volume = 0.5; 
                         }
                     } else {
                         currentAudio.muted = true;
                     }
                 }
-
-                // Update scrollbar behavior
                 var scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
                 if (currentAudio.muted) {
                     $('body').css('overflow-y', 'hidden');
