@@ -20,8 +20,8 @@
                         <!-- Button to create a new playlist -->
                         <!-- <a href="{% url 'create_playlist' %}" class="btn btn-success">Create Playlist</a> -->
                         <div class="row">
-                            {% for user_playlist in user.user_playlist_set.all %}
-                                {% with song=user_playlist.songs %}
+                            {% for User_Playlist in user.User_Playlist_set.all %}
+                                {% with song=User_Playlist.songs %}
                                     <div class="col-md-4" style="padding: 20px">
                                         <div class="card h-100" style="background-color: transparent;">
                                             <img src="{{ song.pimage.url }}" class="card-img-top" alt="...">
