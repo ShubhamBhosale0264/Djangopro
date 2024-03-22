@@ -130,9 +130,7 @@
                 seekBar = $(this).closest('.card-body').find('.seek-bar');
     
                 currentAudio.addEventListener('timeupdate', function() {
-                    var position = currentAudio.currentTime / currentAudio.duration;
-                    seekBar.val(position * 100);
-                    updateTimes();
+                    requestAnimationFrame(updateSeek);
                 });
     
                 seekBar.on('input', function() {
@@ -180,6 +178,12 @@
                 var durationSeconds = Math.floor(currentAudio.duration % 60);
                 startTime.text(currentMinutes + ':' + (currentSeconds < 10 ? '0' : '') + currentSeconds);
                 endTime.text(durationMinutes + ':' + (durationSeconds < 10 ? '0' : '') + durationSeconds);
+            }
+
+            function updateSeek() {
+                var position = currentAudio.currentTime / currentAudio.duration;
+                seekBar.val(position * 100);
+                updateTimes();
             }
         });
     </script>

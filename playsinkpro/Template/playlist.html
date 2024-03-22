@@ -139,6 +139,11 @@
                     if (nextSong.length !== 0) {
                         nextSong.trigger('click');
                     }
+                } else if (e.key === "m" || e.key === "M") { // Toggle mute/unmute when 'm' key is pressed
+                    e.preventDefault();
+                    if (currentAudio) {
+                        currentAudio.muted = !currentAudio.muted; // Toggle the muted state
+                    }
                 }
             });
     
@@ -165,6 +170,7 @@
                 endTime.text(durationMinutes + ':' + (durationSeconds < 10 ? '0' : '') + durationSeconds);
             }
         });
-    </script>    
+    </script>
+        
 </body>
 </html>
